@@ -5,8 +5,6 @@ class Game {
     this.coconut = options.coconut;
     this.bar = options.bar;
     this.monkeys = options.monkeys;
-    // this.monkeyLeft = options.monkeyLeft;
-    // this.monkeyRight = options.monkeyRight;
     this.score = 0;
     this.lives = 3;
     this.gameOver = undefined;
@@ -44,21 +42,20 @@ class Game {
     }
   }
 
-  // _drawMonkeys() {
-  //     for (var i = 0; i < this.monkeys.length, i++) {
-  //         this.ctx.beginPath();
-  //         this.ctx.rect(
-  //             this.monkeys[i].x,
-  //             this.monkeys[i].y,
-  //             this.monkeys[i].width,
-  //             this.monkeys[i].height
-  //         );
-  //         this.ctx.fillStyle = "#804000";
-  //         this.ctx.fill();
-  //         this.ctx.closePath();
-  //     }
-
-  // }
+  _drawMonkeys() {
+    for (var i = 0; i < this.monkeys.length; i++) {
+      this.ctx.beginPath();
+      this.ctx.rect(
+        this.monkeys[i].x,
+        this.monkeys[i].y,
+        this.monkeys[i].width,
+        this.monkeys[i].height
+      );
+      this.ctx.fillStyle = "#804000";
+      this.ctx.fill();
+      this.ctx.closePath();
+    }
+  }
 
   _drawBar() {
     this.ctx.beginPath();
@@ -107,7 +104,7 @@ class Game {
     this._drawCanvas();
     this._drawBar();
     this._drawTrees();
-    // this._drawMonkeys();
+    this._drawMonkeys();
     this._drawCoconut();
     this._drawScore();
     this._drawLives();
@@ -152,12 +149,6 @@ class Game {
       }
     }
 
-    // if (rightPressed && barX < canvas.width - barWidth) {
-    //   barX += 7;
-    // } else if (leftPressed && barX > 0) {
-    //   barX -= 7;
-    // }
-
     this.coconut.x += this.coconut.dx;
     this.coconut.y += this.coconut.dy;
 
@@ -172,23 +163,3 @@ class Game {
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
   }
 }
-
-//   document.addEventListener("keydown", keyDownHandler, false);
-//   document.addEventListener("keyup", keyUpHandler, false);
-
-// _keyDownHandler(e) {
-//   if (e.keyCode === 39) {
-//     this.rightPressed = true;
-//   }
-//   else if (e.keyCode === 37) {
-//     this.leftPressed = true;
-//   }
-// }
-// _keyUpHandler(e) {
-//   if (e.keyCode === 39) {
-//     this.rightPressed = false;
-//   }
-//   else if (e.keyCode === 37) {
-//     this.leftPressed = false;
-//   }
-// }
