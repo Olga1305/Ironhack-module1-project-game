@@ -103,10 +103,38 @@ class Game {
     );
   }
 
+  _throwCoconut() {
+    this.coconut.x = this._randomTree().x + 50;
+    if (this.coconut.x === this.trees[0].x + 50) {
+      this.coconut.dx = 1;
+    } else {
+      this.coconut.dx = -1;
+    }
+    this.coconut.y = 100;
+    this.coconut.dy = 3;
+    this.bar.x = (canvas.width - this.bar.width) / 2;
+  }
+
   _setDirection(angle, speed) {
     var rads = (angle * Math.PI) / 180;
     this.coconut.dx = (Math.cos(rads) * speed) / 6;
     this.coconut.dy = (Math.sin(rads) * speed) / 6;
+  }
+
+  _collisionDetect() {
+    this.monkeys.forEach(monkey => {
+      if (
+        this.coconut.x > monkey.x &&
+        this.coconut.x < monkey.x + monkey.width &&
+        this.coconut.y > monkey.y &&
+        this.coconut.y < monkey.y + monkey.height
+      ) {
+        this.score++;
+        this._throwCoconut();
+      } else {
+        return this.score;
+      }
+    });
   }
 
   _update() {
@@ -118,6 +146,7 @@ class Game {
     this._drawCoconut();
     this._drawScore();
     this._drawLives();
+    this._collisionDetect();
 
     // Rebote bordes laterales
     if (
@@ -153,18 +182,10 @@ class Game {
       } else {
         this.lives--;
         if (!this.lives) {
-          // alert("GAME OVER");
+          alert("GAME OVER");
           document.location.reload();
         } else {
-          this.coconut.x = this._randomTree().x + 50;
-          if (this.coconut.x === this.trees[0].x + 50) {
-            this.coconut.dx = 1;
-          } else {
-            this.coconut.dx = -1;
-          }
-          this.coconut.y = 100;
-          this.coconut.dy = 3;
-          this.bar.x = (canvas.width - this.bar.width) / 2;
+          this._throwCoconut();
         }
       }
     }
