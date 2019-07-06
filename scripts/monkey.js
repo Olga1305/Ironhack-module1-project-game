@@ -6,6 +6,4 @@ class Monkey {
     this.x = x;
     this.y = 300;
   }
-
-  eat() {}
 }

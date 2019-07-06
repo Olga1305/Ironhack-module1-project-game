@@ -19,6 +19,10 @@ class Game {
     };
   }
 
+  _randomTree() {
+    return this.trees[Math.floor(Math.random() * this.trees.length)];
+  }
+
   _drawCanvas() {
     this.ctx.beginPath();
     this.ctx.rect(0, 0, canvas.width, canvas.height);
@@ -152,9 +156,13 @@ class Game {
           // alert("GAME OVER");
           document.location.reload();
         } else {
-          this.coconut.x = canvas.width - canvas.width / 3;
+          this.coconut.x = this._randomTree().x + 50;
+          if (this.coconut.x === this.trees[0].x + 50) {
+            this.coconut.dx = 1;
+          } else {
+            this.coconut.dx = -1;
+          }
           this.coconut.y = 100;
-          this.coconut.dx = -1;
           this.coconut.dy = 3;
           this.bar.x = (canvas.width - this.bar.width) / 2;
         }
@@ -172,47 +180,8 @@ class Game {
 
   start() {
     this._assignControlsToMouse();
+    this.coconut.x = this._randomTree().x + 50;
     this._update();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
   }
 }
-
-// // Rebote barra antiguo
-// if (this.coconut.y + this.coconut.dy > this.bar.y - this.coconut.radius) {
-//     this.coconut.y += this.coconut.dy;
-//     if (
-//         this.coconut.x > this.bar.x - 10 &&
-//         this.coconut.x < this.bar.x + this.bar.width + 10
-//     ) {
-//         this.coconut.dy = -this.coconut.dy;
-//         this.coconut.dy = this.coconut.dy * this.coconut.friction;
-//         this.coconut.dx = this.coconut.dx * this.coconut.friction;
-//     } else {
-//         this.lives--;
-//         if (!this.lives) {
-//             // alert("GAME OVER");
-//             document.location.reload();
-//         } else {
-//             this.coconut.x = canvas.width - canvas.width / 3;
-//             this.coconut.y = 100;
-//             this.coconut.dx = -1;
-//             this.coconut.dy = 3;
-//             this.bar.x = (canvas.width - this.bar.width) / 2;
-//         }
-//     }
-// }
-
-var dx;
-var dy;
-function setDirection(angle, speed) {
-  var rads = (angle * Math.PI) / 180;
-  dx = (Math.cos(rads) * speed) / 60;
-  dy = (Math.sin(rads) * speed) / 60;
-  console.log(dx, dy);
-}
-
-setDirection(60, 100);
-setDirection(120, 100);
-setDirection(150, 100);
-setDirection(90, 100);
-setDirection(45, 100);

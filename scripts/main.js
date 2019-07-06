@@ -5,8 +5,8 @@ document.onload = (function() {
   var game = new Game({
     trees: [
       new Tree("left", 160),
-      new Tree("medium", 640),
-      new Tree("right", 400)
+      new Tree("medium", 400),
+      new Tree("right", 640)
     ],
     monkeys: [new Monkey("left", 70), new Monkey("right", 760)],
     coconut: new Coconut(),

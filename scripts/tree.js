@@ -6,6 +6,4 @@ class Tree {
     this.x = x;
     this.y = 10;
   }
-
-  _throwCoconut() {}
 }

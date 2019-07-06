@@ -61,8 +61,4 @@ class Bar {
       }
     ];
   }
-
-  moveLeft() {}
-
-  moveRight() {}
 }
