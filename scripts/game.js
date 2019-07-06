@@ -8,6 +8,7 @@ class Game {
     this.score = 0;
     this.lives = 3;
     this.gameOver = undefined;
+    this.intervalGame = undefined;
   }
 
   _assignControlsToMouse() {
