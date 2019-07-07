@@ -9,6 +9,7 @@ class Game {
     this.lives = 3;
     this.gameOver = undefined;
     this.intervalGame = undefined;
+    this.fallenCoconut = undefined;
   }
 
   _assignControlsToMouse() {
@@ -84,6 +85,20 @@ class Game {
     this.ctx.closePath();
   }
 
+  _drawFallenCoconut() {
+    this.ctx.beginPath();
+    this.ctx.arc(
+      this.fallenCoconut.x,
+      this.fallenCoconut.y,
+      this.coconut.radius,
+      0,
+      Math.PI * 2
+    );
+    this.ctx.fillStyle = "white";
+    this.ctx.fill();
+    this.ctx.closePath();
+  }
+
   _drawScore() {
     this.ctx.font = "16px Arial";
     this.ctx.fillStyle = "white";
@@ -111,9 +126,8 @@ class Game {
     } else {
       this.coconut.dx = -1;
     }
-    this.coconut.y = 100;
+    this.coconut.y = 70;
     this.coconut.dy = 3;
-    this.bar.x = (canvas.width - this.bar.width) / 2;
   }
 
   _setDirection(angle, speed) {
@@ -149,21 +163,17 @@ class Game {
     this._drawLives();
     this._collisionDetect();
 
-    // Rebote bordes laterales
-    if (
-      this.coconut.x + this.coconut.dx >= canvas.width - this.coconut.radius ||
-      this.coconut.x + this.coconut.dx < this.coconut.radius
-    ) {
-      this.coconut.dx = -this.coconut.dx * this.coconut.friction;
+    if (this.fallenCoconut != undefined) {
+      this._drawFallenCoconut();
     }
+
+    // Rebote bordes laterales
+    this.coconut._bounceLaterals();
 
     // Rebote borde superior
-    if (this.coconut.y + this.coconut.dy < this.coconut.radius) {
-      this.coconut.dy = -this.coconut.dy;
-    }
+    this.coconut._bounceTop();
 
     // Rebote barra
-
     if (this.coconut.y + this.coconut.dy > this.bar.y - this.coconut.radius) {
       if (
         this.coconut.x >= this.bar.x - 10 &&
@@ -177,11 +187,10 @@ class Game {
             this._setDirection(barSection.angle, barSection.speed);
           }
         });
-        this.coconut.dy = -this.coconut.dy;
-        this.coconut.dy = this.coconut.dy * this.coconut.friction;
-        this.coconut.dx = this.coconut.dx * this.coconut.friction;
+        this.coconut._barCollision();
       } else {
         this.lives--;
+        this.coconut._fall;
         if (!this.lives) {
           alert("GAME OVER");
           document.location.reload();
@@ -191,9 +200,8 @@ class Game {
       }
     }
 
-    this.coconut.dy += this.coconut.gravity;
-    this.coconut.x += this.coconut.dx;
-    this.coconut.y += this.coconut.dy;
+    // Caída
+    this.coconut._fall();
 
     if (this.intervalGame !== undefined) {
       window.requestAnimationFrame(this._update.bind(this));
@@ -207,3 +215,31 @@ class Game {
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
   }
 }
+
+// if (this.fallenCoconut === undefined) {
+//   this.fallenCoconut = {
+//     x: this.coconut.x,
+//     y: this.coconut.y,
+//     dx: this.coconut.dx,
+//     dy: this.coconut.dy
+//   };
+// }
+
+// if (this.fallenCoconut != undefined) {
+//   this.fallenCoconut.dy += this.coconut.gravity;
+//   this.fallenCoconut.x += this.fallenCoconut.dx;
+//   this.fallenCoconut.y += this.fallenCoconut.dy;
+// }
+
+// if (
+//   this.fallenCoconut.y + this.fallenCoconut.dy >=
+//   canvas.height - 50 - this.coconut.radius
+// ) {
+//   this.fallenCoconut.dx = 0;
+//   this.fallenCoconut.dy = 0;
+//   this.fallenCoconuts.push(this.fallenCoconut);
+// }
+
+// if (this.fallenCoconut.dx === 0 && this.fallenCoconut.dy === 0) {
+//   this._throwCoconut();
+// }
