@@ -8,6 +8,8 @@ class Game {
     this.coconut = options.coconut;
     this.bar = options.bar;
     this.monkeys = options.monkeys;
+    this.leftMonkey = options.leftMonkey;
+    this.rightMonkey = options.rightMonkey;
     this.score = 0;
     this.lives = 3;
     this.gameOver = undefined;
@@ -36,8 +38,13 @@ class Game {
   }
 
   _drawTrees() {
+    this.ctx.beginPath();
+    this.ctx.rect(canvas.width - 180, canvas.height / 2 - 40, 150, 80);
+    this.ctx.fillStyle = "green";
+    this.ctx.fill();
+    this.ctx.closePath();
     this.ctx.drawImage(this.leftPalmTree, -20, 100, 400, 550);
-    this.ctx.drawImage(this.rightPalmTree, 550, 100, 400, 550);
+    this.ctx.drawImage(this.rightPalmTree, 550, 80, 400, 550);
 
     // for (var i = 0; i < this.trees.length; i++) {
     //   this.ctx.beginPath();
@@ -58,18 +65,33 @@ class Game {
   }
 
   _drawMonkeys() {
-    for (var i = 0; i < this.monkeys.length; i++) {
-      this.ctx.beginPath();
-      this.ctx.rect(
-        this.monkeys[i].x,
-        this.monkeys[i].y,
-        this.monkeys[i].width,
-        this.monkeys[i].height
-      );
-      this.ctx.fillStyle = "#804000";
-      this.ctx.fill();
-      this.ctx.closePath();
-    }
+    this.ctx.drawImage(
+      this.leftMonkey,
+      this.monkeys[0].x - 50,
+      this.monkeys[0].y - 50,
+      140,
+      168
+    );
+
+    this.ctx.drawImage(
+      this.rightMonkey,
+      this.monkeys[1].x - 20,
+      this.monkeys[1].y - 50,
+      140,
+      168
+    );
+    // for (var i = 0; i < this.monkeys.length; i++) {
+    //   this.ctx.beginPath();
+    //   this.ctx.rect(
+    //     this.monkeys[i].x,
+    //     this.monkeys[i].y,
+    //     this.monkeys[i].width,
+    //     this.monkeys[i].height
+    //   );
+    //   this.ctx.fillStyle = "#804000";
+    //   this.ctx.fill();
+    //   this.ctx.closePath();
+    // }
   }
 
   _drawBar() {
