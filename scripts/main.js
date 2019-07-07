@@ -2,8 +2,9 @@ document.onload = (function() {
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
   const bkGround = new Image();
-  // bkGround.src = "../Ironhack-module1-project-game/img/background.png";
   bkGround.src = "../Ironhack-module1-project-game/img/background1.jpg";
+  // bkGround.src = "../Ironhack-module1-project-game/img/bg_r.png";
+  // bkGround.src = "../Ironhack-module1-project-game/img/background.png";
   // bkGround.src = "../Ironhack-module1-project-game/img/background2.png";
   // bkGround.src = "../Ironhack-module1-project-game/img/BG_jungle.png";
   // bkGround.src = "../Ironhack-module1-project-game/img/game_background_1.png";
@@ -43,6 +44,34 @@ document.onload = (function() {
   document.body.appendChild(rMonkey);
   const rightMonkey = document.getElementById("rMonkey");
 
+  const coco = new Image();
+  coco.src = "../Ironhack-module1-project-game/img/coconut.png";
+  coco.id = "coco";
+  coco.style = "display: none";
+  document.body.appendChild(coco);
+  const coconutImg = document.getElementById("coco");
+
+  const cocoFalls = new Image();
+  cocoFalls.src = "../Ironhack-module1-project-game/img/fallencoconut.png";
+  cocoFalls.id = "cocoFalls";
+  cocoFalls.style = "display: none";
+  document.body.appendChild(cocoFalls);
+  const fallenCoconutImg = document.getElementById("cocoFalls");
+
+  const heart = new Image();
+  heart.src = "../Ironhack-module1-project-game/img/heart.png";
+  heart.id = "heart";
+  heart.style = "display: none";
+  document.body.appendChild(heart);
+  const life = document.getElementById("heart");
+
+  const heart2 = new Image();
+  heart2.src = "../Ironhack-module1-project-game/img/heart2.png";
+  heart2.id = "heart2";
+  heart2.style = "display: none";
+  document.body.appendChild(heart2);
+  const lostLife = document.getElementById("heart2");
+
   const game = new Game({
     trees: [
       new Tree("left", 160),
@@ -57,7 +86,11 @@ document.onload = (function() {
     leftPalmTree: leftPalmTree,
     rightPalmTree: rightPalmTree,
     leftMonkey: leftMonkey,
-    rightMonkey: rightMonkey
+    rightMonkey: rightMonkey,
+    coconutImg: coconutImg,
+    fallenCoconutImg: fallenCoconutImg,
+    life: life,
+    lostLife: lostLife
   });
 
   game.start();

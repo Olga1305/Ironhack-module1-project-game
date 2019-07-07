@@ -1,6 +1,6 @@
 class Coconut {
   constructor(x) {
-    this.radius = 20;
+    this.radius = 30;
     this.x = canvas.width / 2;
     this.y = 25;
     this.dx = -1;

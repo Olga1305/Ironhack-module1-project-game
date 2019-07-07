@@ -6,12 +6,16 @@ class Game {
     this.leftPalmTree = options.leftPalmTree;
     this.rightPalmTree = options.rightPalmTree;
     this.coconut = options.coconut;
+    this.coconutImg = options.coconutImg;
+    this.fallenCoconutImg = options.fallenCoconutImg;
     this.bar = options.bar;
     this.monkeys = options.monkeys;
     this.leftMonkey = options.leftMonkey;
     this.rightMonkey = options.rightMonkey;
     this.score = 0;
     this.lives = 3;
+    this.life = options.life;
+    this.lostLife = options.lostLife;
     this.gameOver = undefined;
     this.intervalGame = undefined;
   }
@@ -38,11 +42,13 @@ class Game {
   }
 
   _drawTrees() {
+    // Parche en el backgound
     this.ctx.beginPath();
     this.ctx.rect(canvas.width - 180, canvas.height / 2 - 40, 150, 80);
     this.ctx.fillStyle = "green";
     this.ctx.fill();
     this.ctx.closePath();
+    // Palmeras
     this.ctx.drawImage(this.leftPalmTree, -20, 100, 400, 550);
     this.ctx.drawImage(this.rightPalmTree, 550, 80, 400, 550);
 
@@ -103,53 +109,65 @@ class Game {
   }
 
   _drawCoconut() {
-    this.ctx.beginPath();
-    this.ctx.arc(
-      this.coconut.x,
-      this.coconut.y,
-      this.coconut.radius,
-      0,
-      Math.PI * 2
-    );
-    this.ctx.fillStyle = "white";
-    this.ctx.fill();
-    this.ctx.closePath();
+    this.ctx.drawImage(this.coconutImg, this.coconut.x, this.coconut.y, 85, 85);
+    // this.ctx.beginPath();
+    // this.ctx.arc(
+    //   this.coconut.x,
+    //   this.coconut.y,
+    //   this.coconut.radius,
+    //   0,
+    //   Math.PI * 2
+    // );
+    // this.ctx.fillStyle = "white";
+    // this.ctx.fill();
+    // this.ctx.closePath();
   }
 
   _drawFallenCoconuts() {
     for (var i = 0; i < this.coconut.fallenCoconuts.length; i++) {
-      this.ctx.beginPath();
-      this.ctx.arc(
+      this.ctx.drawImage(
+        this.fallenCoconutImg,
         this.coconut.fallenCoconuts[i].x,
-        this.coconut.fallenCoconuts[i].y,
-        this.coconut.radius,
-        0,
-        Math.PI * 2
+        this.coconut.fallenCoconuts[i].y - 50,
+        124,
+        82
       );
-      this.ctx.fillStyle = "white";
-      this.ctx.fill();
-      this.ctx.closePath();
     }
+
+    // for (var i = 0; i < this.coconut.fallenCoconuts.length; i++) {
+    //   this.ctx.beginPath();
+    //   this.ctx.arc(
+    //     this.coconut.fallenCoconuts[i].x,
+    //     this.coconut.fallenCoconuts[i].y,
+    //     this.coconut.radius,
+    //     0,
+    //     Math.PI * 2
+    //   );
+    //   this.ctx.fillStyle = "white";
+    //   this.ctx.fill();
+    //   this.ctx.closePath();
+    // }
   }
 
   _drawScore() {
-    this.ctx.font = "28px Arial";
-    this.ctx.fillStyle = "black";
-    this.ctx.fillText(
-      "Score: " + this.score,
-      canvas.width / 2 - 30,
-      canvas.height / 4
-    );
+    this.ctx.font = "bold 70px sans-serif";
+    this.ctx.fillStyle = "white";
+    this.ctx.fillText(this.score, 30, 80);
   }
 
   _drawLives() {
-    this.ctx.font = "28px Arial";
-    this.ctx.fillStyle = "black";
-    this.ctx.fillText(
-      "Lives: " + this.lives,
-      canvas.width / 2 - 30,
-      canvas.height / 4 + 35
-    );
+    var x = 331;
+    var y = 120;
+    for (var i = 0; i < this.lives; i++) {
+      this.ctx.drawImage(this.life, x, y, 46, 43);
+      x += 90;
+    }
+    if (this.lives !== 3) {
+      for (var i = 0; i < 3 - this.lives; i++) {
+        this.ctx.drawImage(this.lostLife, x, y, 46, 43);
+        x += 90;
+      }
+    }
   }
 
   _throwCoconut() {
@@ -199,7 +217,7 @@ class Game {
     // Rebote barra (condicionales)
     if (
       this.coconut.y + this.coconut.dy >
-      this.bar.y - this.coconut.radius / 2
+      this.bar.y - this.coconut.radius - 15
     ) {
       if (
         this.coconut.x >= this.bar.x - 10 &&
