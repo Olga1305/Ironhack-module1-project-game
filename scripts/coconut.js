@@ -2,7 +2,7 @@ class Coconut {
   constructor(x) {
     this.radius = 20;
     this.x = canvas.width / 2;
-    this.y = 70;
+    this.y = 25;
     this.dx = -1;
     this.dy = 3;
     this.gravity = 0.4;

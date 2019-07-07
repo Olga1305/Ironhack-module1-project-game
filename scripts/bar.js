@@ -7,58 +7,91 @@ class Bar {
     this.sections = [
       {
         min: this.x - 10,
-        max: this.x + 9,
+        max: this.x + 19,
         angle: 150,
         speed: 100
       },
       {
-        min: this.x + 10,
-        max: this.x + 29,
-        angle: 135,
-        speed: 100
-      },
-      {
-        min: this.x + 30,
-        max: this.x + 49,
+        min: this.x + 20,
+        max: this.x + 59,
         angle: 120,
         speed: 100
       },
       {
-        min: this.x + 50,
-        max: this.x + 69,
-        angle: 105,
-        speed: 100
-      },
-      {
-        min: this.x + 70,
-        max: this.x + 89,
+        min: this.x + 60,
+        max: this.x + 99,
         angle: 90,
         speed: 100
       },
       {
-        min: this.x + 90,
-        max: this.x + 109,
-        angle: 75,
-        speed: 100
-      },
-      {
-        min: this.x + 110,
-        max: this.x + 129,
+        min: this.x + 100,
+        max: this.x + 139,
         angle: 60,
         speed: 100
       },
       {
-        min: this.x + 130,
-        max: this.x + 149,
-        angle: 45,
-        speed: 100
-      },
-      {
-        min: this.x + 150,
+        min: this.x + 140,
         max: this.x + 170,
         angle: 30,
         speed: 100
       }
     ];
+
+    // this.sections = [
+    //   {
+    //     min: this.x - 10,
+    //     max: this.x + 9,
+    //     angle: 150,
+    //     speed: 100
+    //   },
+    //   {
+    //     min: this.x + 10,
+    //     max: this.x + 29,
+    //     angle: 135,
+    //     speed: 100
+    //   },
+    //   {
+    //     min: this.x + 30,
+    //     max: this.x + 49,
+    //     angle: 120,
+    //     speed: 100
+    //   },
+    //   {
+    //     min: this.x + 50,
+    //     max: this.x + 69,
+    //     angle: 105,
+    //     speed: 100
+    //   },
+    //   {
+    //     min: this.x + 70,
+    //     max: this.x + 89,
+    //     angle: 90,
+    //     speed: 100
+    //   },
+    //   {
+    //     min: this.x + 90,
+    //     max: this.x + 109,
+    //     angle: 75,
+    //     speed: 100
+    //   },
+    //   {
+    //     min: this.x + 110,
+    //     max: this.x + 129,
+    //     angle: 60,
+    //     speed: 100
+    //   },
+    //   {
+    //     min: this.x + 130,
+    //     max: this.x + 149,
+    //     angle: 45,
+    //     speed: 100
+    //   },
+    //   {
+    //     min: this.x + 150,
+    //     max: this.x + 170,
+    //     angle: 30,
+    //     speed: 100
+    //   }
+    // ];
   }
 }

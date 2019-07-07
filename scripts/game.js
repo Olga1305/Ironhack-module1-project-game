@@ -1,7 +1,10 @@
 class Game {
   constructor(options) {
     this.ctx = options.ctx;
+    this.background = options.background;
     this.trees = options.trees;
+    this.leftPalmTree = options.leftPalmTree;
+    this.rightPalmTree = options.rightPalmTree;
     this.coconut = options.coconut;
     this.bar = options.bar;
     this.monkeys = options.monkeys;
@@ -18,32 +21,36 @@ class Game {
         this.bar.x = relativeX - this.bar.width / 2;
       }
     };
-    // document.onmousedown = e => {
-    //   this.intervalGame ? this.pause() : this._update();
-    // };
+    document.onmousedown = e => {
+      this.intervalGame ? this.pause() : this._update();
+    };
   }
 
   _drawCanvas() {
-    this.ctx.beginPath();
-    this.ctx.rect(0, 0, canvas.width, canvas.height);
-    this.ctx.fillStyle = "#00aae4";
-    this.ctx.fill();
-    this.ctx.closePath();
+    this.ctx.drawImage(this.background, 0, 0, 900, 600);
+    // this.ctx.beginPath();
+    // this.ctx.rect(0, 0, canvas.width, canvas.height);
+    // this.ctx.fillStyle = "#00aae4";
+    // this.ctx.fill();
+    // this.ctx.closePath();
   }
 
   _drawTrees() {
-    for (var i = 0; i < this.trees.length; i++) {
-      this.ctx.beginPath();
-      this.ctx.rect(
-        this.trees[i].x,
-        this.trees[i].y,
-        this.trees[i].width,
-        this.trees[i].height
-      );
-      this.ctx.fillStyle = "green";
-      this.ctx.fill();
-      this.ctx.closePath();
-    }
+    this.ctx.drawImage(this.leftPalmTree, -20, 100, 400, 550);
+    this.ctx.drawImage(this.rightPalmTree, 550, 100, 400, 550);
+
+    // for (var i = 0; i < this.trees.length; i++) {
+    //   this.ctx.beginPath();
+    //   this.ctx.rect(
+    //     this.trees[i].x,
+    //     this.trees[i].y,
+    //     this.trees[i].width,
+    //     this.trees[i].height
+    //   );
+    //   this.ctx.fillStyle = "green";
+    //   this.ctx.fill();
+    //   this.ctx.closePath();
+    // }
   }
 
   _randomTree() {
@@ -104,8 +111,8 @@ class Game {
   }
 
   _drawScore() {
-    this.ctx.font = "16px Arial";
-    this.ctx.fillStyle = "white";
+    this.ctx.font = "28px Arial";
+    this.ctx.fillStyle = "black";
     this.ctx.fillText(
       "Score: " + this.score,
       canvas.width / 2 - 30,
@@ -114,12 +121,12 @@ class Game {
   }
 
   _drawLives() {
-    this.ctx.font = "16px Arial";
-    this.ctx.fillStyle = "white";
+    this.ctx.font = "28px Arial";
+    this.ctx.fillStyle = "black";
     this.ctx.fillText(
       "Lives: " + this.lives,
       canvas.width / 2 - 30,
-      canvas.height / 4 + 30
+      canvas.height / 4 + 35
     );
   }
 
@@ -130,7 +137,7 @@ class Game {
     } else {
       this.coconut.dx = -1;
     }
-    this.coconut.y = 70;
+    this.coconut.y = 25;
     this.coconut.dy = 3;
   }
 
