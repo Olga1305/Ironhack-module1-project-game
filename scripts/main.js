@@ -2,7 +2,7 @@ document.onload = (function() {
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
 
-  var game = new Game({
+  const game = new Game({
     trees: [
       new Tree("left", 160),
       new Tree("medium", 400),

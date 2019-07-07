@@ -7,7 +7,6 @@ class Coconut {
     this.dy = 3;
     this.gravity = 0.4;
     this.friction = 0.995;
-    // this.fallenCoconut = undefined;
     this.fallenCoconuts = [];
   }
 
@@ -32,9 +31,15 @@ class Coconut {
     }
   }
 
-  _barCollision() {
+  _bounceBar() {
     this.dy = -this.dy;
     this.dy = this.dy * this.friction;
     this.dx = this.dx * this.friction;
+  }
+
+  _setDirection(angle, speed) {
+    var rads = (angle * Math.PI) / 180;
+    this.dx = (Math.cos(rads) * speed) / 6;
+    this.dy = (Math.sin(rads) * speed) / 6;
   }
 }
