@@ -9,6 +9,7 @@ class Game {
     this.coconutImg = options.coconutImg;
     this.fallenCoconutImg = options.fallenCoconutImg;
     this.bar = options.bar;
+    this.barImg = options.barImg;
     this.monkeys = options.monkeys;
     this.leftMonkey = options.leftMonkey;
     this.rightMonkey = options.rightMonkey;
@@ -101,15 +102,17 @@ class Game {
   }
 
   _drawBar() {
-    this.ctx.beginPath();
-    this.ctx.rect(this.bar.x, this.bar.y, this.bar.width, this.bar.height);
-    this.ctx.fillStyle = "white";
-    this.ctx.fill();
-    this.ctx.closePath();
+    this.ctx.drawImage(this.barImg, this.bar.x, this.bar.y, 160, 48);
+
+    // this.ctx.beginPath();
+    // this.ctx.rect(this.bar.x, this.bar.y, this.bar.width, this.bar.height);
+    // this.ctx.fillStyle = "white";
+    // this.ctx.fill();
+    // this.ctx.closePath();
   }
 
   _drawCoconut() {
-    this.ctx.drawImage(this.coconutImg, this.coconut.x, this.coconut.y, 85, 85);
+    this.ctx.drawImage(this.coconutImg, this.coconut.x, this.coconut.y, 60, 60);
     // this.ctx.beginPath();
     // this.ctx.arc(
     //   this.coconut.x,

@@ -45,7 +45,7 @@ document.onload = (function() {
   const rightMonkey = document.getElementById("rMonkey");
 
   const coco = new Image();
-  coco.src = "../Ironhack-module1-project-game/img/coconut.png";
+  coco.src = "../Ironhack-module1-project-game/img/coco.png";
   coco.id = "coco";
   coco.style = "display: none";
   document.body.appendChild(coco);
@@ -72,6 +72,13 @@ document.onload = (function() {
   document.body.appendChild(heart2);
   const lostLife = document.getElementById("heart2");
 
+  const padle = new Image();
+  padle.src = "../Ironhack-module1-project-game/img/pad1.png";
+  padle.id = "padle";
+  padle.style = "display: none";
+  document.body.appendChild(padle);
+  const barImg = document.getElementById("padle");
+
   const game = new Game({
     trees: [
       new Tree("left", 160),
@@ -90,7 +97,8 @@ document.onload = (function() {
     coconutImg: coconutImg,
     fallenCoconutImg: fallenCoconutImg,
     life: life,
-    lostLife: lostLife
+    lostLife: lostLife,
+    barImg: barImg
   });
 
   game.start();
