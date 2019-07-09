@@ -4,18 +4,78 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-  </head>
-  <body>
-    <canvas id="canvas" width="900" height="600"></canvas>
-    <div id="gameover" style="display: none">
-      Game Over
-    </div>
+    <title>Bounce Master</title>
+    <link type="text/css" rel="stylesheet" href="main.css" media="screen" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="scripts/monkey.js"></script>
     <script src="scripts/tree.js"></script>
     <script src="scripts/coconut.js"></script>
     <script src="scripts/bar.js"></script>
     <script src="scripts/game.js"></script>
     <script src="scripts/main.js"></script>
+  </head>
+  <body>
+    <header class="container">
+      <h1>Bounce Master</h1>
+
+      <!-- <div class="clearfix"></div> -->
+    </header>
+
+    <canvas id="canvas" width="900" height="600"></canvas>
+    <div id="gameover">
+      <img src="../Ironhack-module1-project-game/img/gameover.png" />
+    </div>
+
+    <section class="container" id="container1">
+      <article>
+        <button class="btn" id="game1">Game 1</button>
+      </article>
+
+      <article>
+        <button class="btn" id="game2">Game 2</button>
+      </article>
+
+      <article>
+        <button class="btn" id="game3">Game 3</button>
+      </article>
+    </section>
+
+    <section class="container" id="container2">
+      <article>
+        <button class="btn" id="game4">Game 4</button>
+      </article>
+
+      <article>
+        <button class="btn" id="game5">Game 5</button>
+      </article>
+
+      <article>
+        <button class="btn" id="game6">Game 6</button>
+      </article>
+    </section>
+
+    <div class="clearfix"></div>
+
+    <!-- <div id="list-container" class="container">
+    <div class="list-item">
+      Element 1
+    </div>
+
+    <div class="list-item">
+      Element 2
+    </div>
+
+    <div class="list-item">
+      Element 3
+    </div>
+
+    <div class="list-item">
+      Element 4
+    </div>
+
+    <div class="list-item">
+      Element 5
+    </div>
+  </div> -->
   </body>
 </html>

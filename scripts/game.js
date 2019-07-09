@@ -159,7 +159,7 @@ class Game {
   }
 
   _drawLives() {
-    var x = 331;
+    var x = 337;
     var y = 120;
     for (var i = 0; i < this.lives; i++) {
       this.ctx.drawImage(this.life, x, y, 46, 43);
@@ -203,13 +203,13 @@ class Game {
   _update() {
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
     this._drawCanvas();
-    this._drawBar();
     this._drawTrees();
     this._drawMonkeys();
     this._drawScore();
     this._drawLives();
     this._drawCoconut();
     this._drawFallenCoconuts();
+    this._drawBar();
     this._collisionDetect();
 
     this.coconut._bounceLaterals();

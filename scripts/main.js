@@ -1,4 +1,4 @@
-document.onload = (function() {
+$(document).ready(function() {
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
   const bkGround = new Image();
@@ -101,7 +101,11 @@ document.onload = (function() {
     barImg: barImg
   });
 
-  game.start();
+  $("#game1").click(function(e) {
+    $(".container").hide();
+    $("#canvas").show();
+    game.start();
+  });
 
   game.gameOver = function() {
     let gameOver = document.getElementById("gameover");
