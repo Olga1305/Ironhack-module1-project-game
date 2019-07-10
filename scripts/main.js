@@ -7,17 +7,17 @@ $(document).ready(function() {
 
   // Images
 
-  const bgdHome = new Image();
-  bgdHome.src = "../Ironhack-module1-project-game/img/home01.png";
+  // const bgdHome = new Image();
+  // bgdHome.src = "../Ironhack-module1-project-game/img/home01.png";
 
-  const game01 = new Image();
-  game01.src = "../Ironhack-module1-project-game/img/game1.png";
+  // const game01 = new Image();
+  // game01.src = "../Ironhack-module1-project-game/img/game1.png";
 
-  const play01 = new Image();
-  play01.src = "../Ironhack-module1-project-game/img/play1.png";
+  // const play01 = new Image();
+  // play01.src = "../Ironhack-module1-project-game/img/play1.png";
 
-  const frame01 = new Image();
-  frame01.src = "../Ironhack-module1-project-game/img/frame.png";
+  // const frame01 = new Image();
+  // frame01.src = "../Ironhack-module1-project-game/img/frame.png";
 
   // Mouse
 
@@ -26,7 +26,12 @@ $(document).ready(function() {
     y: innerHeight / 2
   };
 
-  var clickGame01 = 0;
+  // let clickGame01 = 0;
+  // let clickGame02 = 0;
+  // let clickGame03 = 0;
+  // let clickGame04 = 0;
+  // let clickGame05 = 0;
+  // let clickGame06 = 0;
 
   function mouseControls() {
     canvas.addEventListener("mousemove", function(e) {
@@ -35,21 +40,26 @@ $(document).ready(function() {
     });
 
     canvas.addEventListener("click", function a(e) {
-      if (
-        mouse.x > playGame1.x &&
-        mouse.x < playGame1.x + playGame1.width &&
-        mouse.y > playGame1.y &&
-        mouse.y < playGame1.y + playGame1.height
-      ) {
-        clickGame01++;
-        startGame();
-      } else {
-        init();
-      }
+      games.forEach(function(game) {
+        if (
+          mouse.x > game.x &&
+          mouse.x < game.x + game.width &&
+          mouse.y > game.y &&
+          mouse.y < game.y + game.height
+        ) {
+          game.click++;
+          if (game.click === 1) {
+            canvas.removeEventListener("click", a);
+            startGame();
+          }
+        } else {
+          init();
+        }
 
-      if (clickGame01 === 1) {
-        canvas.removeEventListener("click", a);
-      }
+        if (game.click === 1) {
+          canvas.removeEventListener("click", a);
+        }
+      });
     });
   }
 
@@ -58,7 +68,7 @@ $(document).ready(function() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     canvas.width = 900;
     canvas.height = 600;
-    canvas.style = "padding-top: 150px";
+    canvas.style = "padding-top: 200px";
     game.start();
   }
 
@@ -80,7 +90,7 @@ $(document).ready(function() {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  var ballArray = [];
+  let ballArray = [];
 
   function init() {
     ballArray = [];
@@ -109,12 +119,63 @@ $(document).ready(function() {
 
   // Menu
 
-  const playGame1 = {
-    x: canvas.width / 2 - 390,
-    y: canvas.height / 3 + 50,
-    width: 100,
-    height: 100
-  };
+  let games = [
+    {
+      id: "monkeys",
+      x: canvas.width / 2 - 390,
+      y: canvas.height / 3 + 50,
+      width: 100,
+      height: 100,
+      click: 0
+    },
+    {
+      id: "hollywood",
+      x: canvas.width / 2 - 50,
+      y: canvas.height / 3 + 50,
+      width: 100,
+      height: 100,
+      click: 0
+    },
+    {
+      id: "fox",
+      x: canvas.width / 2 + 290,
+      y: canvas.height / 3 + 50,
+      width: 100,
+      height: 100,
+      click: 0
+    },
+    {
+      id: "knight",
+      x: canvas.width / 2 - 390,
+      y: canvas.height / 3 + 290,
+      width: 100,
+      height: 100,
+      click: 0
+    },
+    {
+      id: "penguin",
+      x: canvas.width / 2 - 50,
+      y: canvas.height / 3 + 290,
+      width: 100,
+      height: 100,
+      click: 0
+    },
+    {
+      id: "alien",
+      x: canvas.width / 2 + 290,
+      y: canvas.height / 3 + 290,
+      width: 100,
+      height: 100,
+      click: 0
+    }
+  ];
+
+  // const playGame1 = {
+  //   x: canvas.width / 2 - 390,
+  //   y: canvas.height / 3 + 50,
+  //   width: 100,
+  //   height: 100
+  // };
 
   function drawPreviews() {
     var x = canvas.width / 2 - 495;
@@ -159,58 +220,57 @@ $(document).ready(function() {
   init();
   animate();
 
-  // Game images
+  // Game Monkey images
 
   const background = new Image();
   background.src = "../Ironhack-module1-project-game/img/background1.jpg";
 
-  const leftPalmTree = new Image();
-  leftPalmTree.src = "../Ironhack-module1-project-game/img/tree_6.png";
+  const leftLateral = new Image();
+  leftLateral.src = "../Ironhack-module1-project-game/img/tree_6.png";
 
-  const rightPalmTree = new Image();
-  rightPalmTree.src = "../Ironhack-module1-project-game/img/tree_2.png";
+  const rightLateral = new Image();
+  rightLateral.src = "../Ironhack-module1-project-game/img/tree_2.png";
 
-  const leftMonkey = new Image();
-  leftMonkey.src =
+  const leftCatcher = new Image();
+  leftCatcher.src =
     "../Ironhack-module1-project-game/img/monkey/monkey_jump_1.png";
 
-  const rightMonkey = new Image();
-  rightMonkey.src =
+  const rightCatcher = new Image();
+  rightCatcher.src =
     "../Ironhack-module1-project-game/img/monkey/monkey_jump_1_r.png";
 
-  const coconutImg = new Image();
-  coconutImg.src = "../Ironhack-module1-project-game/img/coco.png";
+  const jumperImg = new Image();
+  jumperImg.src = "../Ironhack-module1-project-game/img/coco.png";
 
-  const fallenCoconutImg = new Image();
-  fallenCoconutImg.src =
-    "../Ironhack-module1-project-game/img/fallencoconut.png";
+  const fallenImg = new Image();
+  fallenImg.src = "../Ironhack-module1-project-game/img/fallencoconut.png";
 
-  const life = new Image();
-  life.src = "../Ironhack-module1-project-game/img/heart.png";
+  // const life = new Image();
+  // life.src = "../Ironhack-module1-project-game/img/heart.png";
 
-  const lostLife = new Image();
-  lostLife.src = "../Ironhack-module1-project-game/img/heart2.png";
+  // const lostLife = new Image();
+  // lostLife.src = "../Ironhack-module1-project-game/img/heart2.png";
 
   const barImg = new Image();
   barImg.src = "../Ironhack-module1-project-game/img/pad1.png";
 
   const game = new Game({
-    trees: [
-      new Tree("left", 160),
-      new Tree("medium", 400),
-      new Tree("right", 640)
+    laterals: [
+      new Lateral("left", 160),
+      new Lateral("medium", 400),
+      new Lateral("right", 640)
     ],
-    monkeys: [new Monkey("left", 70), new Monkey("right", 760)],
-    coconut: new Coconut(),
+    catchers: [new Catcher("left", 70), new Catcher("right", 760)],
+    jumper: new Jumper(),
     bar: new Bar(),
     ctx: ctx,
     background: background,
-    leftPalmTree: leftPalmTree,
-    rightPalmTree: rightPalmTree,
-    leftMonkey: leftMonkey,
-    rightMonkey: rightMonkey,
-    coconutImg: coconutImg,
-    fallenCoconutImg: fallenCoconutImg,
+    leftLateral: leftLateral,
+    rightLateral: rightLateral,
+    leftCatcher: leftCatcher,
+    rightCatcher: rightCatcher,
+    jumperImg: jumperImg,
+    fallenImg: fallenImg,
     life: life,
     lostLife: lostLife,
     barImg: barImg

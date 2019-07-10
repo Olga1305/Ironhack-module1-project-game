@@ -1,4 +1,4 @@
-class Monkey {
+class Catcher {
   constructor(id, x) {
     this.id = id;
     this.width = 70;

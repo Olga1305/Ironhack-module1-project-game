@@ -1,4 +1,4 @@
-class Tree {
+class Lateral {
   constructor(id, x) {
     this.id = id;
     this.width = 100;

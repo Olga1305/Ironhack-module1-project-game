@@ -2,18 +2,19 @@ class Game {
   constructor(options) {
     this.ctx = options.ctx;
     this.background = options.background;
-    this.trees = options.trees;
-    this.leftPalmTree = options.leftPalmTree;
-    this.rightPalmTree = options.rightPalmTree;
-    this.coconut = options.coconut;
-    this.coconutImg = options.coconutImg;
-    this.fallenCoconutImg = options.fallenCoconutImg;
+    this.laterals = options.laterals;
+    this.leftLateral = options.leftLateral;
+    this.rightLateral = options.rightLateral;
+    this.jumper = options.jumper;
+    this.jumperImg = options.jumperImg;
+    this.fallenImg = options.fallenImg;
     this.bar = options.bar;
     this.barImg = options.barImg;
-    this.monkeys = options.monkeys;
-    this.leftMonkey = options.leftMonkey;
-    this.rightMonkey = options.rightMonkey;
-    this.score = 0;
+    this.catchers = options.catchers;
+    this.leftCatcher = options.leftCatcher;
+    this.rightCatcher = options.rightCatcher;
+    this.scoreLeft = 0;
+    this.scoreRight = 0;
     this.lives = 3;
     this.life = options.life;
     this.lostLife = options.lostLife;
@@ -28,9 +29,9 @@ class Game {
         this.bar.x = relativeX - this.bar.width / 2;
       }
     };
-    document.onmousedown = e => {
-      this.intervalGame ? this.pause() : this._update();
-    };
+    // document.onmousedown = e => {
+    //   this.intervalGame ? this.pause() : this._update();
+    // };
   }
 
   _drawCanvas() {
@@ -42,58 +43,46 @@ class Game {
     // this.ctx.closePath();
   }
 
-  _drawTrees() {
+  _drawLaterals() {
     // Parche en el backgound
     this.ctx.beginPath();
     this.ctx.rect(canvas.width - 180, canvas.height / 2 - 40, 150, 80);
     this.ctx.fillStyle = "green";
     this.ctx.fill();
     this.ctx.closePath();
-    // Palmeras
-    this.ctx.drawImage(this.leftPalmTree, -20, 100, 400, 550);
-    this.ctx.drawImage(this.rightPalmTree, 550, 80, 400, 550);
 
-    // for (var i = 0; i < this.trees.length; i++) {
-    //   this.ctx.beginPath();
-    //   this.ctx.rect(
-    //     this.trees[i].x,
-    //     this.trees[i].y,
-    //     this.trees[i].width,
-    //     this.trees[i].height
-    //   );
-    //   this.ctx.fillStyle = "green";
-    //   this.ctx.fill();
-    //   this.ctx.closePath();
-    // }
+    // Laterals
+    this.ctx.drawImage(this.leftLateral, -20, 100, 400, 550);
+    this.ctx.drawImage(this.rightLateral, 550, 80, 400, 550);
   }
 
-  _randomTree() {
-    return this.trees[Math.floor(Math.random() * this.trees.length)];
+  _randomLateral() {
+    return this.laterals[Math.floor(Math.random() * this.laterals.length)];
   }
 
-  _drawMonkeys() {
+  _drawCatchers() {
     this.ctx.drawImage(
-      this.leftMonkey,
-      this.monkeys[0].x - 50,
-      this.monkeys[0].y - 50,
+      this.leftCatcher,
+      this.catchers[0].x - 50,
+      this.catchers[0].y - 50,
       140,
       168
     );
 
     this.ctx.drawImage(
-      this.rightMonkey,
-      this.monkeys[1].x - 20,
-      this.monkeys[1].y - 50,
+      this.rightCatcher,
+      this.catchers[1].x - 20,
+      this.catchers[1].y - 50,
       140,
       168
     );
-    // for (var i = 0; i < this.monkeys.length; i++) {
+    // for (var i = 0; i < this.catchers.length; i++) {
     //   this.ctx.beginPath();
     //   this.ctx.rect(
-    //     this.monkeys[i].x,
-    //     this.monkeys[i].y,
-    //     this.monkeys[i].width,
-    //     this.monkeys[i].height
+    //     this.catchers[i].x,
+    //     this.catchers[i].y,
+    //     this.catchers[i].width,
+    //     this.catchers[i].height
     //   );
     //   this.ctx.fillStyle = "#804000";
     //   this.ctx.fill();
@@ -111,13 +100,13 @@ class Game {
     // this.ctx.closePath();
   }
 
-  _drawCoconut() {
-    this.ctx.drawImage(this.coconutImg, this.coconut.x, this.coconut.y, 60, 60);
+  _drawJumper() {
+    this.ctx.drawImage(this.jumperImg, this.jumper.x, this.jumper.y, 60, 60);
     // this.ctx.beginPath();
     // this.ctx.arc(
-    //   this.coconut.x,
-    //   this.coconut.y,
-    //   this.coconut.radius,
+    //   this.jumper.x,
+    //   this.jumper.y,
+    //   this.jumper.radius,
     //   0,
     //   Math.PI * 2
     // );
@@ -126,23 +115,23 @@ class Game {
     // this.ctx.closePath();
   }
 
-  _drawFallenCoconuts() {
-    for (var i = 0; i < this.coconut.fallenCoconuts.length; i++) {
+  _drawFallen() {
+    for (var i = 0; i < this.jumper.fallen.length; i++) {
       this.ctx.drawImage(
-        this.fallenCoconutImg,
-        this.coconut.fallenCoconuts[i].x,
-        this.coconut.fallenCoconuts[i].y - 50,
+        this.fallenImg,
+        this.jumper.fallen[i].x,
+        this.jumper.fallen[i].y - 50,
         124,
         82
       );
     }
 
-    // for (var i = 0; i < this.coconut.fallenCoconuts.length; i++) {
+    // for (var i = 0; i < this.jumper.fallen.length; i++) {
     //   this.ctx.beginPath();
     //   this.ctx.arc(
-    //     this.coconut.fallenCoconuts[i].x,
-    //     this.coconut.fallenCoconuts[i].y,
-    //     this.coconut.radius,
+    //     this.jumper.fallen[i].x,
+    //     this.jumper.fallen[i].y,
+    //     this.jumper.radius,
     //     0,
     //     Math.PI * 2
     //   );
@@ -155,7 +144,7 @@ class Game {
   _drawScore() {
     this.ctx.font = "bold 70px sans-serif";
     this.ctx.fillStyle = "white";
-    this.ctx.fillText(this.score, 30, 80);
+    this.ctx.fillText(this.scoreLeft, 30, 80);
   }
 
   _drawLives() {
@@ -173,29 +162,29 @@ class Game {
     }
   }
 
-  _throwCoconut() {
-    this.coconut.x = this._randomTree().x + 50;
-    if (this.coconut.x === this.trees[0].x + 50) {
-      this.coconut.dx = 1;
+  _throwJumper() {
+    this.jumper.x = this._randomLateral().x + 50;
+    if (this.jumper.x === this.laterals[0].x + 50) {
+      this.jumper.dx = 1;
     } else {
-      this.coconut.dx = -1;
+      this.jumper.dx = -1;
     }
-    this.coconut.y = 25;
-    this.coconut.dy = 3;
+    this.jumper.y = 25;
+    this.jumper.dy = 3;
   }
 
   _collisionDetect() {
-    this.monkeys.forEach(monkey => {
+    this.catchers.forEach(catcher => {
       if (
-        this.coconut.x > monkey.x &&
-        this.coconut.x < monkey.x + monkey.width &&
-        this.coconut.y > monkey.y &&
-        this.coconut.y < monkey.y + monkey.height
+        this.jumper.x > catcher.x &&
+        this.jumper.x < catcher.x + catcher.width &&
+        this.jumper.y > catcher.y &&
+        this.jumper.y < catcher.y + catcher.height
       ) {
-        this.score++;
-        this._throwCoconut();
+        this.scoreLeft++;
+        this._throwJumper();
       } else {
-        return this.score;
+        return this.scoreLeft;
       }
     });
   }
@@ -203,59 +192,56 @@ class Game {
   _update() {
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
     this._drawCanvas();
-    this._drawTrees();
-    this._drawMonkeys();
+    this._drawLaterals();
+    this._drawCatchers();
     this._drawScore();
     this._drawLives();
-    this._drawCoconut();
-    this._drawFallenCoconuts();
+    this._drawJumper();
+    this._drawFallen();
     this._drawBar();
     this._collisionDetect();
 
-    this.coconut._bounceLaterals();
+    this.jumper._bounceLaterals();
 
     // Just in case :)
-    this.coconut._bounceTop();
+    this.jumper._bounceTop();
 
     // Rebote barra (condicionales)
-    if (
-      this.coconut.y + this.coconut.dy >
-      this.bar.y - this.coconut.radius - 15
-    ) {
+    if (this.jumper.y + this.jumper.dy > this.bar.y - this.jumper.radius - 15) {
       if (
-        this.coconut.x >= this.bar.x - 10 &&
-        this.coconut.x <= this.bar.x + this.bar.width + 10
+        this.jumper.x >= this.bar.x - 10 &&
+        this.jumper.x <= this.bar.x + this.bar.width + 10
       ) {
         this.bar.sections.forEach(barSection => {
           if (
-            this.coconut.x >= barSection.min &&
-            this.coconut.x <= barSection.max
+            this.jumper.x >= barSection.min &&
+            this.jumper.x <= barSection.max
           ) {
-            this.coconut._setDirection(barSection.angle, barSection.speed);
+            this.jumper._setDirection(barSection.angle, barSection.speed);
           }
         });
-        this.coconut._bounceBar();
+        this.jumper._bounceBar();
       } else {
         if (
-          this.coconut.y + this.coconut.dy >
-          canvas.height - 20 - this.coconut.radius / 2
+          this.jumper.y + this.jumper.dy >
+          canvas.height - 20 - this.jumper.radius / 2
         ) {
           this.lives--;
-          var fallenCoconut = {
-            x: this.coconut.x,
-            y: this.coconut.y
+          var fallenJumper = {
+            x: this.jumper.x,
+            y: this.jumper.y
           };
-          this.coconut.fallenCoconuts.push(fallenCoconut);
+          this.jumper.fallen.push(fallenJumper);
           if (!this.lives) {
             this.gameOver();
           } else {
-            this._throwCoconut();
+            this._throwJumper();
           }
         }
       }
     }
 
-    this.coconut._fall();
+    this.jumper._fall();
 
     if (this.intervalGame !== undefined) {
       window.requestAnimationFrame(this._update.bind(this));
@@ -271,7 +257,7 @@ class Game {
 
   start() {
     this._assignControlsToMouse();
-    this.coconut.x = this._randomTree().x + 50;
+    this.jumper.x = this._randomLateral().x + 50;
     this._update();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
   }
