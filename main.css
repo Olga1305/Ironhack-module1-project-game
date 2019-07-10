@@ -15,7 +15,7 @@ canvas {
 
 body {
   font-family: Arial;
-  padding: 20px 0;
+  /* padding: 20px 0; */
   background-image: url(../Ironhack-module1-project-game/img/start.png);
 }
 
