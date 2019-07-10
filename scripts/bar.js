@@ -3,7 +3,7 @@ class Bar {
     this.width = 160;
     this.height = 15;
     this.x = (canvas.width - this.width) / 2;
-    this.y = canvas.height - 100;
+    this.y = 500;
     // this.sections = [
     //   {
     //     min: this.x - 10,
