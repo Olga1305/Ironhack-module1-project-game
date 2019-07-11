@@ -38,7 +38,7 @@ $(document).ready(function() {
           }
         } else {
           init();
-          console.log(games[i].x);
+          // console.log(games[i].x);
         }
       }
     });
@@ -59,6 +59,28 @@ $(document).ready(function() {
     fallenImg.src = games[gameNumber].fallen;
     barImg.src = games[gameNumber].bar;
 
+    lateralLeftX = games[gameNumber].lateralLeftX;
+    lateralLeftY = games[gameNumber].lateralLeftY;
+    lateralLeftWidth = games[gameNumber].lateralLeftWidth;
+    lateralLeftHeight = games[gameNumber].lateralLeftHeight;
+    lateralRightX = games[gameNumber].lateralRightX;
+    lateralRightY = games[gameNumber].lateralRightY;
+    lateralRightWidth = games[gameNumber].lateralRightWidth;
+    lateralRightHeight = games[gameNumber].lateralRightHeight;
+    catcherLeftImgX = games[gameNumber].catcherLeftImgX;
+    catcherLeftImgY = games[gameNumber].catcherLeftImgY;
+    catcherRightImgX = games[gameNumber].catcherRightImgX;
+    catcherRightImgY = games[gameNumber].catcherRightImgY;
+    catcherImgWidth = games[gameNumber].catcherImgWidth;
+    catcherImgHeight = games[gameNumber].catcherImgHeight;
+
+    console.log(
+      lateralLeftX,
+      lateralLeftY,
+      lateralLeftWidth,
+      lateralLeftHeight
+    );
+
     const game = new Game({
       laterals: [
         new Lateral("left", 160),
@@ -71,15 +93,36 @@ $(document).ready(function() {
       ctx: ctx,
       background: background,
       leftLateral: leftLateral,
+      lateralLeftX: lateralLeftX,
+      lateralLeftY: lateralLeftY,
+      lateralLeftWidth: lateralLeftWidth,
+      lateralLeftHeight: lateralLeftHeight,
       rightLateral: rightLateral,
+      lateralRightX: lateralRightX,
+      lateralRightY: lateralRightY,
+      lateralRightWidth: lateralRightWidth,
+      lateralRightHeight: lateralRightHeight,
       leftCatcher: leftCatcher,
+      catcherLeftImgX: catcherLeftImgX,
+      catcherLeftImgY: catcherLeftImgY,
       rightCatcher: rightCatcher,
+      catcherRightImgX: catcherRightImgX,
+      catcherRightImgY: catcherRightImgY,
+      catcherImgWidth: catcherImgWidth,
+      catcherImgHeight: catcherImgHeight,
       jumperImg: jumperImg,
       fallenImg: fallenImg,
       life: life,
       lostLife: lostLife,
       barImg: barImg
     });
+
+    console.log(
+      game.lateralLeftX,
+      game.lateralLeftY,
+      game.lateralLeftWidth,
+      game.lateralLeftHeight
+    );
 
     game.start();
 

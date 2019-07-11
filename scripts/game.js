@@ -4,7 +4,15 @@ class Game {
     this.background = options.background;
     this.laterals = options.laterals;
     this.leftLateral = options.leftLateral;
+    this.lateralLeftX = options.lateralLeftX;
+    this.lateralLeftY = options.lateralLeftY;
+    this.lateralLeftWidth = options.lateralLeftWidth;
+    this.lateralLeftHeight = options.lateralLeftHeight;
     this.rightLateral = options.rightLateral;
+    this.lateralRightX = options.lateralRightX;
+    this.lateralRightY = options.lateralRightY;
+    this.lateralRightWidth = options.lateralRightWidth;
+    this.lateralRightHeight = options.lateralRightHeight;
     this.jumper = options.jumper;
     this.jumperImg = options.jumperImg;
     this.fallenImg = options.fallenImg;
@@ -13,6 +21,12 @@ class Game {
     this.catchers = options.catchers;
     this.leftCatcher = options.leftCatcher;
     this.rightCatcher = options.rightCatcher;
+    this.catcherLeftImgX = options.catcherLeftImgX;
+    this.catcherLeftImgY = options.catcherLeftImgY;
+    this.catcherRightImgX = options.catcherRightImgX;
+    this.catcherRightImgY = options.catcherRightImgY;
+    this.catcherImgWidth = options.catcherImgWidth;
+    this.catcherImgHeight = options.catcherImgHeight;
     this.scoreLeft = 0;
     this.scoreRight = 0;
     this.lives = 3;
@@ -45,15 +59,30 @@ class Game {
 
   _drawLaterals() {
     // Parche en el backgound
-    this.ctx.beginPath();
-    this.ctx.rect(canvas.width - 180, canvas.height / 2 - 40, 150, 80);
-    this.ctx.fillStyle = "green";
-    this.ctx.fill();
-    this.ctx.closePath();
+    // this.ctx.beginPath();
+    // this.ctx.rect(canvas.width - 180, canvas.height / 2 - 40, 150, 80);
+    // this.ctx.fillStyle = "green";
+    // this.ctx.fill();
+    // this.ctx.closePath();
 
     // Laterals
-    this.ctx.drawImage(this.leftLateral, -20, 100, 400, 550);
-    this.ctx.drawImage(this.rightLateral, 550, 80, 400, 550);
+    // this.ctx.drawImage(this.leftLateral, -20, 100, 400, 550);
+    // this.ctx.drawImage(this.rightLateral, 550, 80, 400, 550);
+
+    this.ctx.drawImage(
+      this.leftLateral,
+      this.lateralLeftX,
+      this.lateralLeftY,
+      this.lateralLeftWidth,
+      this.lateralLeftHeight
+    );
+    this.ctx.drawImage(
+      this.rightLateral,
+      this.lateralRightX,
+      this.lateralRightY,
+      this.lateralRightWidth,
+      this.lateralRightHeight
+    );
   }
 
   _randomLateral() {
@@ -63,19 +92,36 @@ class Game {
   _drawCatchers() {
     this.ctx.drawImage(
       this.leftCatcher,
-      this.catchers[0].x - 50,
-      this.catchers[0].y - 50,
-      140,
-      168
+      this.catcherLeftImgX,
+      this.catcherLeftImgY,
+      this.catcherImgWidth,
+      this.catcherImgHeight
     );
 
     this.ctx.drawImage(
       this.rightCatcher,
-      this.catchers[1].x - 20,
-      this.catchers[1].y - 50,
-      140,
-      168
+      this.catcherRightImgX,
+      this.catcherRightImgY,
+      this.catcherImgWidth,
+      this.catcherImgHeight
     );
+
+    // this.ctx.drawImage(
+    //   this.leftCatcher,
+    //   this.catchers[0].x - 50,
+    //   this.catchers[0].y - 50,
+    //   140,
+    //   168
+    // );
+
+    // this.ctx.drawImage(
+    //   this.rightCatcher,
+    //   this.catchers[1].x - 20,
+    //   this.catchers[1].y - 50,
+    //   140,
+    //   168
+    // );
+
     // for (var i = 0; i < this.catchers.length; i++) {
     //   this.ctx.beginPath();
     //   this.ctx.rect(
