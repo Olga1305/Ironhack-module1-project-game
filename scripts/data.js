@@ -178,3 +178,30 @@ const rightCatcher = new Image();
 const jumperImg = new Image();
 const fallenImg = new Image();
 const barImg = new Image();
+
+// Audio
+
+const clickSound = document.createElement("audio");
+clickSound.src =
+  "../Ironhack-module1-project-game/audio/menu-selection-click.wav";
+
+const bounceSound = document.createElement("audio");
+bounceSound.src = "../Ironhack-module1-project-game/audio/jump.wav";
+
+const bounce2Sound = document.createElement("audio");
+bounce2Sound.src = "../Ironhack-module1-project-game/audio/jump2.wav";
+
+const successSound = document.createElement("audio");
+successSound.src = "../Ironhack-module1-project-game/audio/success-1.wav";
+
+const success2Sound = document.createElement("audio");
+success2Sound.src = "../Ironhack-module1-project-game/audio/success-2.wav";
+
+const failSound = document.createElement("audio");
+failSound.src = "../Ironhack-module1-project-game/audio/fail-1.wav";
+
+const gameOverSound = document.createElement("audio");
+gameOverSound.src = "../Ironhack-module1-project-game/audio/game-over.wav";
+
+const gameOver2Sound = document.createElement("audio");
+gameOver2Sound.src = "../Ironhack-module1-project-game/audio/game-over-2.wav";

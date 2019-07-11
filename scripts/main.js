@@ -28,6 +28,7 @@ $(document).ready(function() {
           mouse.y < games[i].y + games[i].height
         ) {
           games[i].click++;
+          clickSound.play();
           if (games[i].click === 1) {
             canvas.removeEventListener("click", a);
             gameNumber = i;
@@ -83,6 +84,8 @@ $(document).ready(function() {
     game.start();
 
     game.gameOver = function() {
+      window.cancelAnimationFrame(this.intervalGame);
+      this.intervalGame = undefined;
       let gameOver = document.getElementById("gameover");
       canvas.style = "display: none";
       gameOver.style = "display: block";

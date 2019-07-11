@@ -35,6 +35,7 @@ class Jumper {
     this.dy = -this.dy;
     this.dy = this.dy * this.friction;
     this.dx = this.dx * this.friction;
+    bounceSound.play();
   }
 
   _setDirection(angle, speed) {

@@ -182,6 +182,7 @@ class Game {
         this.jumper.y < catcher.y + catcher.height
       ) {
         this.scoreLeft++;
+        successSound.play();
         this._throwJumper();
       } else {
         return this.scoreLeft;
@@ -227,12 +228,16 @@ class Game {
           canvas.height - 20 - this.jumper.radius / 2
         ) {
           this.lives--;
+          failSound.play();
+
           var fallenJumper = {
             x: this.jumper.x,
             y: this.jumper.y
           };
           this.jumper.fallen.push(fallenJumper);
           if (!this.lives) {
+            gameOver2Sound.play();
+
             this.gameOver();
           } else {
             this._throwJumper();
