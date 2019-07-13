@@ -33,7 +33,7 @@ $(document).ready(function() {
             canvas.removeEventListener("click", a);
             gameNumber = i;
 
-            console.log(gameNumber);
+            // console.log(gameNumber);
             startGame();
           }
         } else {
@@ -50,6 +50,7 @@ $(document).ready(function() {
     canvas.width = 900;
     canvas.height = 600;
     canvas.style = "padding-top: 200px";
+    gameId = games[gameNumber].id;
     background.src = games[gameNumber].bg;
     leftLateral.src = games[gameNumber].lateralLeft;
     rightLateral.src = games[gameNumber].lateralRight;
@@ -82,6 +83,7 @@ $(document).ready(function() {
     );
 
     const game = new Game({
+      gameId: gameId,
       laterals: [
         new Lateral("left", 160),
         new Lateral("medium", 400),

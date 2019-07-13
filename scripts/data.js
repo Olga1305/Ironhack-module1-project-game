@@ -209,6 +209,7 @@ let games = [
   }
 ];
 
+let gameId = undefined;
 let lateralLeftX = undefined;
 let lateralLeftY = undefined;
 let lateralLeftWidth = undefined;

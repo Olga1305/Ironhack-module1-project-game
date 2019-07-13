@@ -1,5 +1,6 @@
 class Game {
   constructor(options) {
+    this.gameId = options.gameId;
     this.ctx = options.ctx;
     this.background = options.background;
     this.laterals = options.laterals;
@@ -147,7 +148,65 @@ class Game {
   }
 
   _drawJumper() {
-    this.ctx.drawImage(this.jumperImg, this.jumper.x, this.jumper.y, 60, 60);
+    switch (this.gameId) {
+      case "monkeys":
+        this.ctx.drawImage(
+          this.jumperImg,
+          this.jumper.x,
+          this.jumper.y,
+          60,
+          60
+        );
+        break;
+      case "hollywood":
+        this.ctx.drawImage(
+          this.jumperImg,
+          this.jumper.x,
+          this.jumper.y,
+          60,
+          60
+        );
+        break;
+      case "fox":
+        this.ctx.drawImage(
+          this.jumperImg,
+          this.jumper.x,
+          this.jumper.y,
+          51,
+          67
+        );
+        break;
+      case "knight":
+        this.ctx.drawImage(
+          this.jumperImg,
+          this.jumper.x,
+          this.jumper.y,
+          60,
+          60
+        );
+        break;
+      case "penguin":
+        this.ctx.drawImage(
+          this.jumperImg,
+          this.jumper.x,
+          this.jumper.y,
+          60,
+          60
+        );
+        break;
+      case "alien":
+        this.ctx.drawImage(
+          this.jumperImg,
+          this.jumper.x,
+          this.jumper.y,
+          41,
+          80
+        );
+        break;
+    }
+
+    // this.ctx.drawImage(this.jumperImg, this.jumper.x, this.jumper.y, 60, 60);
+
     // this.ctx.beginPath();
     // this.ctx.arc(
     //   this.jumper.x,
@@ -163,13 +222,79 @@ class Game {
 
   _drawFallen() {
     for (var i = 0; i < this.jumper.fallen.length; i++) {
-      this.ctx.drawImage(
-        this.fallenImg,
-        this.jumper.fallen[i].x,
-        this.jumper.fallen[i].y - 50,
-        124,
-        82
-      );
+      switch (this.gameId) {
+        case "monkeys":
+          this.ctx.drawImage(
+            this.fallenImg,
+            this.jumper.fallen[i].x,
+            this.jumper.fallen[i].y - 50,
+            124,
+            82
+          );
+          break;
+        case "hollywood":
+          this.ctx.drawImage(
+            this.fallenImg,
+            this.jumper.fallen[i].x,
+            this.jumper.fallen[i].y - 50,
+            60,
+            60
+          );
+          break;
+        case "fox":
+          this.ctx.drawImage(
+            this.fallenImg,
+            this.jumper.fallen[i].x,
+            this.jumper.fallen[i].y - 50,
+            51,
+            67
+          );
+          break;
+        case "knight":
+          this.ctx.drawImage(
+            this.fallenImg,
+            this.jumper.fallen[i].x,
+            this.jumper.fallen[i].y - 50,
+            60,
+            60
+          );
+          break;
+        case "penguin":
+          this.ctx.drawImage(
+            this.fallenImg,
+            this.jumper.fallen[i].x,
+            this.jumper.fallen[i].y - 50,
+            60,
+            60
+          );
+          break;
+        case "alien":
+          this.ctx.drawImage(
+            this.fallenImg,
+            this.jumper.fallen[i].x,
+            this.jumper.fallen[i].y - 50,
+            41,
+            80
+          );
+          break;
+      }
+      // if (this.gameId === "monkeys") {
+      //   this.ctx.drawImage(
+      //     this.fallenImg,
+      //     this.jumper.fallen[i].x,
+      //     this.jumper.fallen[i].y - 50,
+      //     124,
+      //     82
+      //   );
+      // } else {
+      //   this.ctx.drawImage(
+      //     this.fallenImg,
+      //     this.jumper.fallen[i].x,
+      //     this.jumper.fallen[i].y - 50,
+      //     60,
+      //     60
+      //   );
+      // }
     }
 
     // for (var i = 0; i < this.jumper.fallen.length; i++) {
@@ -195,7 +320,7 @@ class Game {
 
   _drawLives() {
     var x = 337;
-    var y = 120;
+    var y = 155;
     for (var i = 0; i < this.lives; i++) {
       this.ctx.drawImage(this.life, x, y, 46, 43);
       x += 90;
@@ -313,3 +438,24 @@ class Game {
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
   }
 }
+
+// function drawRotated(degrees) {
+//   context.clearRect(0, 0, canvas.width, canvas.height);
+
+//   // save the unrotated context of the canvas so we can restore it later
+//   // the alternative is to untranslate & unrotate after drawing
+//   context.save();
+
+//   // move to the center of the canvas
+//   context.translate(canvas.width / 2, canvas.height / 2);
+
+//   // rotate the canvas to the specified degrees
+//   context.rotate(degrees * Math.PI / 180);
+
+//   // draw the image
+//   // since the context is rotated, the image will be rotated also
+//   context.drawImage(image, -image.width / 2, -image.width / 2);
+
+//   // we’re done with the rotating so restore the unrotated context
+//   context.restore();
+// }
