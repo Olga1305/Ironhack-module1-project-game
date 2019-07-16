@@ -1,5 +1,6 @@
 class Game {
   constructor(options) {
+    this.gameNum = options.gameNum;
     this.gameId = options.gameId;
     this.ctx = options.ctx;
     this.background = options.background;
@@ -35,6 +36,10 @@ class Game {
     this.lostLife = options.lostLife;
     this.gameOver = undefined;
     this.intervalGame = undefined;
+    this.intervalJumper = undefined;
+    this.curFrame = 0;
+    this.frameCount = 4;
+    this.loopCount = 0;
   }
 
   _assignControlsToMouse() {
@@ -147,7 +152,19 @@ class Game {
     // this.ctx.closePath();
   }
 
+  _updateFrameJumper() {
+    this.intervalJumper = setInterval(
+      function() {
+        this.curFrame = ++this.curFrame % this.frameCount;
+        this.jumperImg.src = games[this.gameNum].jumper[this.curFrame];
+      }.bind(this),
+      120
+    );
+  }
+
   _drawJumper() {
+    console.log(this.jumperImg);
+
     switch (this.gameId) {
       case "monkeys":
         this.ctx.drawImage(
@@ -190,8 +207,8 @@ class Game {
           this.jumperImg,
           this.jumper.x,
           this.jumper.y,
-          60,
-          60
+          72,
+          64
         );
         break;
       case "alien":
@@ -264,8 +281,8 @@ class Game {
             this.fallenImg,
             this.jumper.fallen[i].x,
             this.jumper.fallen[i].y - 50,
-            60,
-            60
+            72,
+            64
           );
           break;
         case "alien":
@@ -273,8 +290,8 @@ class Game {
             this.fallenImg,
             this.jumper.fallen[i].x,
             this.jumper.fallen[i].y - 50,
-            41,
-            80
+            80,
+            41
           );
           break;
       }
@@ -436,26 +453,6 @@ class Game {
     this.jumper.x = this._randomLateral().x + 50;
     this._update();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
+    this._updateFrameJumper();
   }
 }
-
-// function drawRotated(degrees) {
-//   context.clearRect(0, 0, canvas.width, canvas.height);
-
-//   // save the unrotated context of the canvas so we can restore it later
-//   // the alternative is to untranslate & unrotate after drawing
-//   context.save();
-
-//   // move to the center of the canvas
-//   context.translate(canvas.width / 2, canvas.height / 2);
-
-//   // rotate the canvas to the specified degrees
-//   context.rotate(degrees * Math.PI / 180);
-
-//   // draw the image
-//   // since the context is rotated, the image will be rotated also
-//   context.drawImage(image, -image.width / 2, -image.width / 2);
-
-//   // we’re done with the rotating so restore the unrotated context
-//   context.restore();
-// }

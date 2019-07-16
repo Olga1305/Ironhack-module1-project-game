@@ -50,13 +50,14 @@ $(document).ready(function() {
     canvas.width = 900;
     canvas.height = 600;
     canvas.style = "padding-top: 200px";
+    gameNum = gameNumber;
     gameId = games[gameNumber].id;
     background.src = games[gameNumber].bg;
     leftLateral.src = games[gameNumber].lateralLeft;
     rightLateral.src = games[gameNumber].lateralRight;
     leftCatcher.src = games[gameNumber].catcherLeft;
     rightCatcher.src = games[gameNumber].catcherRight;
-    jumperImg.src = games[gameNumber].jumper;
+    jumperImg.src = games[gameNumber].jumper[0];
     fallenImg.src = games[gameNumber].fallen;
     barImg.src = games[gameNumber].bar;
 
@@ -75,14 +76,15 @@ $(document).ready(function() {
     catcherImgWidth = games[gameNumber].catcherImgWidth;
     catcherImgHeight = games[gameNumber].catcherImgHeight;
 
-    console.log(
-      lateralLeftX,
-      lateralLeftY,
-      lateralLeftWidth,
-      lateralLeftHeight
-    );
+    // console.log(
+    //   lateralLeftX,
+    //   lateralLeftY,
+    //   lateralLeftWidth,
+    //   lateralLeftHeight
+    // );
 
     const game = new Game({
+      gameNum: gameNum,
       gameId: gameId,
       laterals: [
         new Lateral("left", 160),
@@ -119,12 +121,12 @@ $(document).ready(function() {
       barImg: barImg
     });
 
-    console.log(
-      game.lateralLeftX,
-      game.lateralLeftY,
-      game.lateralLeftWidth,
-      game.lateralLeftHeight
-    );
+    // console.log(
+    //   game.lateralLeftX,
+    //   game.lateralLeftY,
+    //   game.lateralLeftWidth,
+    //   game.lateralLeftHeight
+    // );
 
     game.start();
 

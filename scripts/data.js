@@ -17,7 +17,12 @@ let games = [
       "../Ironhack-module1-project-game/img/game_monkeys/monkey/monkey_jump_1.png",
     catcherRight:
       "../Ironhack-module1-project-game/img/game_monkeys/monkey/monkey_jump_1_r.png",
-    jumper: "../Ironhack-module1-project-game/img/game_monkeys/coco.png",
+    jumper: [
+      "../Ironhack-module1-project-game/img/game_monkeys/coco.png",
+      "../Ironhack-module1-project-game/img/game_monkeys/coco01.png",
+      "../Ironhack-module1-project-game/img/game_monkeys/coco02.png",
+      "../Ironhack-module1-project-game/img/game_monkeys/coco03.png"
+    ],
     fallen:
       "../Ironhack-module1-project-game/img/game_monkeys/fallencoconut.png",
     bar: "../Ironhack-module1-project-game/img/game_monkeys/pad1.png",
@@ -52,7 +57,12 @@ let games = [
     catcherLeft: "../Ironhack-module1-project-game/img/game_hollywood/bag1.png",
     catcherRight:
       "../Ironhack-module1-project-game/img/game_hollywood/bag2.png",
-    jumper: "../Ironhack-module1-project-game/img/game_hollywood/gem1.png",
+    jumper: [
+      "../Ironhack-module1-project-game/img/game_hollywood/gem1.png",
+      "../Ironhack-module1-project-game/img/game_hollywood/gem2.png",
+      "../Ironhack-module1-project-game/img/game_hollywood/gem3.png",
+      "../Ironhack-module1-project-game/img/game_hollywood/gem4.png"
+    ],
     fallen: "../Ironhack-module1-project-game/img/game_hollywood/gem1.png",
     bar: "../Ironhack-module1-project-game/img/game_hollywood/9.png",
     prev: "../Ironhack-module1-project-game/img/home/preview_hollywood.png",
@@ -83,7 +93,7 @@ let games = [
     lateralRight: "",
     catcherLeft: "../Ironhack-module1-project-game/img/game_fox/fox.png",
     catcherRight: "../Ironhack-module1-project-game/img/game_fox/fox.png",
-    jumper: "../Ironhack-module1-project-game/img/game_fox/building_1.png",
+    jumper: ["../Ironhack-module1-project-game/img/game_fox/building_1.png"],
     fallen: "../Ironhack-module1-project-game/img/game_fox/building_1.png",
     bar: "../Ironhack-module1-project-game/img/game_fox/9.png",
     prev: "../Ironhack-module1-project-game/img/home/preview_fox.png",
@@ -117,7 +127,12 @@ let games = [
       "../Ironhack-module1-project-game/img/game_knight/platform2.png",
     catcherRight:
       "../Ironhack-module1-project-game/img/game_knight/platform2.png",
-    jumper: "../Ironhack-module1-project-game/img/game_knight/knight1.png",
+    jumper: [
+      "../Ironhack-module1-project-game/img/game_knight/knight1.png",
+      "../Ironhack-module1-project-game/img/game_knight/knight1.png",
+      "../Ironhack-module1-project-game/img/game_knight/knight1.png",
+      "../Ironhack-module1-project-game/img/game_knight/knight1.png"
+    ],
     fallen: "../Ironhack-module1-project-game/img/game_knight/knight1.png",
     bar: "../Ironhack-module1-project-game/img/game_knight/6.png",
     prev: "../Ironhack-module1-project-game/img/home/preview_knight.png",
@@ -151,10 +166,14 @@ let games = [
       "../Ironhack-module1-project-game/img/game_penguin/Pad_03_1.png",
     catcherRight:
       "../Ironhack-module1-project-game/img/game_penguin/Pad_03_1.png",
-    jumper:
+    jumper: [
+      "../Ironhack-module1-project-game/img/game_penguin/Animations/penguin_jump01.png",
       "../Ironhack-module1-project-game/img/game_penguin/Animations/penguin_jump02.png",
+      "../Ironhack-module1-project-game/img/game_penguin/Animations/penguin_jump02.png",
+      "../Ironhack-module1-project-game/img/game_penguin/Animations/penguin_jump03.png"
+    ],
     fallen:
-      "../Ironhack-module1-project-game/img/game_penguin/Animations/penguin_jump02.png",
+      "../Ironhack-module1-project-game/img/game_penguin/Animations/penguin_die04.png",
     bar: "../Ironhack-module1-project-game/img/game_penguin/18.png",
     prev: "../Ironhack-module1-project-game/img/home/preview_penguin.png",
     lateralLeftX: 0,
@@ -186,10 +205,14 @@ let games = [
       "../Ironhack-module1-project-game/img/game_alien/spaceship4.png",
     catcherLeft: "../Ironhack-module1-project-game/img/game_alien/11.png",
     catcherRight: "../Ironhack-module1-project-game/img/game_alien/11.png",
-    jumper:
+    jumper: [
+      "../Ironhack-module1-project-game/img/game_alien/alien_green/green__0028_jump_2.png",
+      "../Ironhack-module1-project-game/img/game_alien/alien_green/green__0028_jump_2.png",
       "../Ironhack-module1-project-game/img/game_alien/alien_green/green__0029_jump_3.png",
+      "../Ironhack-module1-project-game/img/game_alien/alien_green/green__0029_jump_3.png"
+    ],
     fallen:
-      "../Ironhack-module1-project-game/img/game_alien/alien_green/green__0029_jump_3.png",
+      "../Ironhack-module1-project-game/img/game_alien/alien_green/green__0026_dead_5.png",
     bar: "../Ironhack-module1-project-game/img/game_alien/11.png",
     prev: "../Ironhack-module1-project-game/img/home/preview_alien.png",
     lateralLeftX: -150,
@@ -209,6 +232,7 @@ let games = [
   }
 ];
 
+let gameNum = undefined;
 let gameId = undefined;
 let lateralLeftX = undefined;
 let lateralLeftY = undefined;
