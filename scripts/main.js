@@ -239,4 +239,22 @@ $(document).ready(function() {
   mouseControls();
   init();
   animate();
+
+  window.addEventListener("resize", function() {
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+    (games[0].x = canvas.width / 2 - 390),
+      (games[0].y = canvas.height / 3 + 50),
+      (games[1].x = canvas.width / 2 - 50),
+      (games[1].y = canvas.height / 3 + 50),
+      (games[2].x = canvas.width / 2 + 290),
+      (games[2].y = canvas.height / 3 + 50),
+      (games[3].x = canvas.width / 2 - 390),
+      (games[3].y = canvas.height / 3 + 290),
+      (games[4].x = canvas.width / 2 - 50),
+      (games[4].y = canvas.height / 3 + 290),
+      (games[5].x = canvas.width / 2 + 290),
+      (games[5].y = canvas.height / 3 + 290),
+      init();
+  });
 });
