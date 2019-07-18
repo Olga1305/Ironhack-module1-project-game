@@ -89,12 +89,25 @@ let games = [
     height: 100,
     click: 0,
     bg: "../Ironhack-module1-project-game/img/game_fox/bg5.jpg",
+    // bg: "../Ironhack-module1-project-game/img/game_fox/7.jpg",
     lateralLeft: "",
     lateralRight: "",
     catcherLeft: "../Ironhack-module1-project-game/img/game_fox/fox.png",
     catcherRight: "../Ironhack-module1-project-game/img/game_fox/fox.png",
-    jumper: ["../Ironhack-module1-project-game/img/game_fox/building_1.png"],
-    fallen: "../Ironhack-module1-project-game/img/game_fox/building_1.png",
+    // jumper: [
+    // "../Ironhack-module1-project-game/img/game_fox/Gold/Gold_1.png",
+    // "../Ironhack-module1-project-game/img/game_fox/Gold/Gold_2.png",
+    // "../Ironhack-module1-project-game/img/game_fox/Gold/Gold_3.png",
+    // "../Ironhack-module1-project-game/img/game_fox/Gold/Gold_4.png"
+    // ],
+    jumper: [
+      "../Ironhack-module1-project-game/img/game_fox/home1.png",
+      "../Ironhack-module1-project-game/img/game_fox/home1.png",
+      "../Ironhack-module1-project-game/img/game_fox/home1.png",
+      "../Ironhack-module1-project-game/img/game_fox/home1.png"
+    ],
+    fallen:
+      "../Ironhack-module1-project-game/img/game_fox/Gold/Gold_fallen.png",
     bar: "../Ironhack-module1-project-game/img/game_fox/9.png",
     prev: "../Ironhack-module1-project-game/img/home/preview_fox.png",
     lateralLeftX: 0,
@@ -254,8 +267,8 @@ let catcherImgHeight = undefined;
 const bgdHome = new Image();
 bgdHome.src = "../Ironhack-module1-project-game/img/home/home01.png";
 
-const game01 = new Image();
-game01.src = "../Ironhack-module1-project-game/img/home/game1.png";
+// const game01 = new Image();
+// game01.src = "../Ironhack-module1-project-game/img/home/game1.png";
 
 const play01 = new Image();
 play01.src = "../Ironhack-module1-project-game/img/home/play1.png";

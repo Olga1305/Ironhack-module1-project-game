@@ -14,6 +14,24 @@ $(document).ready(function() {
   };
 
   function mouseControls() {
+    window.addEventListener("resize", function() {
+      canvas.width = innerWidth;
+      canvas.height = innerHeight;
+      (games[0].x = canvas.width / 2 - 390),
+        (games[0].y = canvas.height / 3 + 50),
+        (games[1].x = canvas.width / 2 - 50),
+        (games[1].y = canvas.height / 3 + 50),
+        (games[2].x = canvas.width / 2 + 290),
+        (games[2].y = canvas.height / 3 + 50),
+        (games[3].x = canvas.width / 2 - 390),
+        (games[3].y = canvas.height / 3 + 290),
+        (games[4].x = canvas.width / 2 - 50),
+        (games[4].y = canvas.height / 3 + 290),
+        (games[5].x = canvas.width / 2 + 290),
+        (games[5].y = canvas.height / 3 + 290),
+        init();
+    });
+
     canvas.addEventListener("mousemove", function(e) {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
@@ -33,12 +51,10 @@ $(document).ready(function() {
             canvas.removeEventListener("click", a);
             gameNumber = i;
 
-            // console.log(gameNumber);
             startGame();
           }
         } else {
           init();
-          // console.log(games[i].x);
         }
       }
     });
@@ -50,6 +66,11 @@ $(document).ready(function() {
     canvas.width = 900;
     canvas.height = 600;
     canvas.style = "padding-top: 200px";
+    $(".container").show();
+    $(".copy > a").css("color", "#616060");
+    $(".copy > p").css("color", "#616060");
+    $(".about > a").css("color", "#616060");
+
     gameNum = gameNumber;
     gameId = games[gameNumber].id;
     background.src = games[gameNumber].bg;
@@ -133,10 +154,25 @@ $(document).ready(function() {
     game.gameOver = function() {
       window.cancelAnimationFrame(this.intervalGame);
       this.intervalGame = undefined;
-      let gameOver = document.getElementById("gameover");
-      canvas.style = "display: none";
-      gameOver.style = "display: block";
+      games[gameNumber].click = 0;
+      $(".copy > a").css("color", "white");
+      $(".copy > p").css("color", "white");
+      $(".about > a").css("color", "white");
+      $("#canvas").hide();
+      $("#gameover").show();
+      $(".container").css("right", "44%");
+      $(".container").css("top", "70%");
     };
+
+    $("#home").click(function(e) {
+      window.cancelAnimationFrame(this.intervalGame);
+      this.intervalGame = undefined;
+      canvas.width = innerWidth;
+      canvas.height = innerHeight;
+      mouseControls();
+      init();
+      animate();
+    });
   }
 
   // Balls on homepage
@@ -239,22 +275,4 @@ $(document).ready(function() {
   mouseControls();
   init();
   animate();
-
-  window.addEventListener("resize", function() {
-    canvas.width = innerWidth;
-    canvas.height = innerHeight;
-    (games[0].x = canvas.width / 2 - 390),
-      (games[0].y = canvas.height / 3 + 50),
-      (games[1].x = canvas.width / 2 - 50),
-      (games[1].y = canvas.height / 3 + 50),
-      (games[2].x = canvas.width / 2 + 290),
-      (games[2].y = canvas.height / 3 + 50),
-      (games[3].x = canvas.width / 2 - 390),
-      (games[3].y = canvas.height / 3 + 290),
-      (games[4].x = canvas.width / 2 - 50),
-      (games[4].y = canvas.height / 3 + 290),
-      (games[5].x = canvas.width / 2 + 290),
-      (games[5].y = canvas.height / 3 + 290),
-      init();
-  });
 });

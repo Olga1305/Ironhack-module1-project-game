@@ -158,12 +158,12 @@ class Game {
         this.curFrame = ++this.curFrame % this.frameCount;
         this.jumperImg.src = games[this.gameNum].jumper[this.curFrame];
       }.bind(this),
-      120
+      200
     );
   }
 
   _drawJumper() {
-    console.log(this.jumperImg);
+    // console.log(this.jumperImg);
 
     switch (this.gameId) {
       case "monkeys":
@@ -189,8 +189,8 @@ class Game {
           this.jumperImg,
           this.jumper.x,
           this.jumper.y,
-          51,
-          67
+          60,
+          60
         );
         break;
       case "knight":
@@ -253,7 +253,7 @@ class Game {
           this.ctx.drawImage(
             this.fallenImg,
             this.jumper.fallen[i].x,
-            this.jumper.fallen[i].y - 50,
+            this.jumper.fallen[i].y - 20,
             60,
             60
           );
@@ -262,16 +262,16 @@ class Game {
           this.ctx.drawImage(
             this.fallenImg,
             this.jumper.fallen[i].x,
-            this.jumper.fallen[i].y - 50,
-            51,
-            67
+            this.jumper.fallen[i].y - 20,
+            56,
+            26
           );
           break;
         case "knight":
           this.ctx.drawImage(
             this.fallenImg,
             this.jumper.fallen[i].x,
-            this.jumper.fallen[i].y - 50,
+            this.jumper.fallen[i].y - 20,
             60,
             60
           );
@@ -289,7 +289,7 @@ class Game {
           this.ctx.drawImage(
             this.fallenImg,
             this.jumper.fallen[i].x,
-            this.jumper.fallen[i].y - 50,
+            this.jumper.fallen[i].y - 20,
             80,
             41
           );
@@ -331,13 +331,32 @@ class Game {
 
   _drawScore() {
     this.ctx.font = "bold 70px sans-serif";
-    this.ctx.fillStyle = "white";
+    if (this.gameId === "penguin") {
+      this.ctx.fillStyle = "red";
+    } else {
+      this.ctx.fillStyle = "white";
+    }
+
+    if (this.gameId === "hollywood") {
+      if (this.scoreRight < 10) {
+        this.ctx.fillText(this.scoreRight, 830, 80);
+      } else {
+        this.ctx.fillText(this.scoreRight, 800, 80);
+      }
+    }
+
     this.ctx.fillText(this.scoreLeft, 30, 80);
   }
 
   _drawLives() {
     var x = 337;
-    var y = 155;
+    var y;
+    if (this.gameId === "hollywood") {
+      y = 180;
+    } else {
+      y = 120;
+    }
+
     for (var i = 0; i < this.lives; i++) {
       this.ctx.drawImage(this.life, x, y, 46, 43);
       x += 90;
@@ -362,20 +381,32 @@ class Game {
   }
 
   _collisionDetect() {
-    this.catchers.forEach(catcher => {
-      if (
-        this.jumper.x > catcher.x &&
-        this.jumper.x < catcher.x + catcher.width &&
-        this.jumper.y > catcher.y &&
-        this.jumper.y < catcher.y + catcher.height
-      ) {
-        this.scoreLeft++;
-        successSound.play();
-        this._throwJumper();
+    if (
+      this.jumper.x > this.catchers[0].x &&
+      this.jumper.x < this.catchers[0].x + this.catchers[0].width &&
+      this.jumper.y > this.catchers[0].y &&
+      this.jumper.y < this.catchers[0].y + this.catchers[0].height
+    ) {
+      ++this.scoreLeft;
+      this._throwJumper();
+    }
+
+    if (
+      this.jumper.x > this.catchers[1].x &&
+      this.jumper.x < this.catchers[1].x + this.catchers[1].width &&
+      this.jumper.y > this.catchers[1].y &&
+      this.jumper.y < this.catchers[1].y + this.catchers[1].height
+    ) {
+      if (this.gameId === "hollywood") {
+        ++this.scoreRight;
       } else {
-        return this.scoreLeft;
+        ++this.scoreLeft;
       }
-    });
+
+      this._throwJumper();
+    } else {
+      return this.scoreLeft;
+    }
   }
 
   _update() {
