@@ -34,7 +34,6 @@ class Game {
     this.lives = 3;
     this.life = options.life;
     this.lostLife = options.lostLife;
-    this.gameOver = undefined;
     this.intervalGame = undefined;
     this.intervalJumper = undefined;
     this.curFrame = 0;
@@ -472,18 +471,30 @@ class Game {
     }
   }
 
-  pause() {
-    if (this.intervalGame) {
-      window.cancelAnimationFrame(this.intervalGame);
-      this.intervalGame = undefined;
-    }
-  }
-
   start() {
     this._assignControlsToMouse();
     this.jumper.x = this._randomLateral().x + 50;
     this._update();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
     this._updateFrameJumper();
+  }
+
+  pause() {
+    if (this.intervalGame) {
+      this.intervalGame = window.cancelAnimationFrame(this.intervalGame);
+      // window.cancelAnimationFrame(this.intervalGame);
+      // this.intervalGame = undefined;
+    }
+  }
+
+  gameOver() {
+    this.intervalGame = window.cancelAnimationFrame(this.intervalGame);
+    $(".copy > a").css("color", "white");
+    $(".copy > p").css("color", "white");
+    $(".about > a").css("color", "white");
+    $("#canvas").hide();
+    $("#gameover").show();
+    $(".container").css("right", "44%");
+    $(".container").css("top", "70%");
   }
 }

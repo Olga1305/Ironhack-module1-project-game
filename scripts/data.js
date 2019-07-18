@@ -299,6 +299,15 @@ const previewAlien = new Image();
 previewAlien.src =
   "../Ironhack-module1-project-game/img/home/preview_alien.png";
 
+let previews = [
+  previewMonkeys,
+  previewHollywood,
+  previewFox,
+  previewKhight,
+  previewPenguin,
+  previewAlien
+];
+
 // Game images
 
 const life = new Image();

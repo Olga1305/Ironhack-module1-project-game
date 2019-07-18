@@ -97,13 +97,6 @@ $(document).ready(function() {
     catcherImgWidth = games[gameNumber].catcherImgWidth;
     catcherImgHeight = games[gameNumber].catcherImgHeight;
 
-    // console.log(
-    //   lateralLeftX,
-    //   lateralLeftY,
-    //   lateralLeftWidth,
-    //   lateralLeftHeight
-    // );
-
     const game = new Game({
       gameNum: gameNum,
       gameId: gameId,
@@ -142,36 +135,10 @@ $(document).ready(function() {
       barImg: barImg
     });
 
-    // console.log(
-    //   game.lateralLeftX,
-    //   game.lateralLeftY,
-    //   game.lateralLeftWidth,
-    //   game.lateralLeftHeight
-    // );
-
     game.start();
 
-    game.gameOver = function() {
-      window.cancelAnimationFrame(this.intervalGame);
-      this.intervalGame = undefined;
-      games[gameNumber].click = 0;
-      $(".copy > a").css("color", "white");
-      $(".copy > p").css("color", "white");
-      $(".about > a").css("color", "white");
-      $("#canvas").hide();
-      $("#gameover").show();
-      $(".container").css("right", "44%");
-      $(".container").css("top", "70%");
-    };
-
     $("#home").click(function(e) {
-      window.cancelAnimationFrame(this.intervalGame);
-      this.intervalGame = undefined;
-      canvas.width = innerWidth;
-      canvas.height = innerHeight;
-      mouseControls();
-      init();
-      animate();
+      window.location.reload(true);
     });
   }
 
@@ -208,31 +175,9 @@ $(document).ready(function() {
     }
   }
 
-  function animate() {
-    requestAnimationFrame(animate);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(bgdHome, 0, 0, canvas.width, canvas.height);
-
-    for (let i = 0; i < ballArray.length; i++) {
-      ballArray[i]._updateBalls();
-    }
-
-    drawPreviews();
-  }
-
-  // Menu
+  // Previews menu
 
   function drawPreviews() {
-    let previews = [];
-
-    previews.push(
-      previewMonkeys,
-      previewHollywood,
-      previewFox,
-      previewKhight,
-      previewPenguin,
-      previewAlien
-    );
     var x = canvas.width / 2 - 495;
     var y = canvas.height / 3 - 5;
     for (var i = 0; i < 3; i++) {
@@ -270,6 +215,18 @@ $(document).ready(function() {
       ctx.drawImage(play01, x, y, 100, 100);
       x += 340;
     }
+  }
+
+  function animate() {
+    requestAnimationFrame(animate);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(bgdHome, 0, 0, canvas.width, canvas.height);
+
+    for (let i = 0; i < ballArray.length; i++) {
+      ballArray[i]._updateBalls();
+    }
+
+    drawPreviews();
   }
 
   mouseControls();
