@@ -5,5 +5,7 @@ class Catcher {
     this.height = 70;
     this.x = x;
     this.y = 300;
+    this.dxLeft = -4;
+    this.dxRight = 4;
   }
 }
