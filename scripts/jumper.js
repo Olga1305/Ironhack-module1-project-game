@@ -16,6 +16,9 @@ class Jumper {
 
   _fall() {
     this.dy += this.gravity;
+    if (this.dx === 0) {
+      this.dx += 1;
+    }
     this.x += this.dx;
     this.y += this.dy;
   }

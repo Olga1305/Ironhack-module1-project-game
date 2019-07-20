@@ -484,6 +484,9 @@ class Game {
 
   _throwJumper() {
     this.jumper.x = this.jumper._randomJumperX(220, 680);
+    if (this.jumper.x > 445 && this.jumper.x < 455) {
+      this.jumper.x += 10;
+    }
     if (this.jumper.x < 450) {
       this.jumper.dx = 1;
     } else {
@@ -586,6 +589,9 @@ class Game {
   start() {
     this._assignControlsToMouse();
     this.jumper.x = this.jumper._randomJumperX(220, 680);
+    if (this.jumper.x > 445 && this.jumper.x < 455) {
+      this.jumper.x += 10;
+    }
     this._update();
     this._updateFrameJumper();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
