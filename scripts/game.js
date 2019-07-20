@@ -22,9 +22,11 @@ class Game {
     this.barImg = options.barImg;
     this.catchers = options.catchers;
     this.leftCatcher = options.leftCatcher;
-    this.rightCatcher = options.rightCatcher;
+    this.leftCatcherAnimate = options.leftCatcherAnimate;
     this.catcherLeftImgX = options.catcherLeftImgX;
     this.catcherLeftImgY = options.catcherLeftImgY;
+    this.rightCatcher = options.rightCatcher;
+    this.rightCatcherAnimate = options.rightCatcherAnimate;
     this.catcherRightImgX = options.catcherRightImgX;
     this.catcherRightImgY = options.catcherRightImgY;
     this.catcherImgWidth = options.catcherImgWidth;
@@ -36,9 +38,13 @@ class Game {
     this.lostLife = options.lostLife;
     this.intervalGame = undefined;
     this.intervalJumper = undefined;
-    this.curFrame = 0;
-    this.frameCount = 4;
-    this.loopCount = 0;
+    this.curFrameJumper = 0;
+    this.frameCountJumper = 3;
+    this.intervalLeftCatcher = undefined;
+    this.curFrameLeftCatcher = 0;
+    this.intervalRightCatcher = undefined;
+    this.curFrameRightCatcher = 0;
+    this.frameCountCatcher = 3;
   }
 
   _assignControlsToMouse() {
@@ -48,32 +54,13 @@ class Game {
         this.bar.x = relativeX - this.bar.width / 2;
       }
     };
-    // document.onmousedown = e => {
-    //   this.intervalGame ? this.pause() : this._update();
-    // };
   }
 
   _drawCanvas() {
     this.ctx.drawImage(this.background, 0, 0, 900, 600);
-    // this.ctx.beginPath();
-    // this.ctx.rect(0, 0, canvas.width, canvas.height);
-    // this.ctx.fillStyle = "#00aae4";
-    // this.ctx.fill();
-    // this.ctx.closePath();
   }
 
   _drawLaterals() {
-    // Parche en el backgound
-    // this.ctx.beginPath();
-    // this.ctx.rect(canvas.width - 180, canvas.height / 2 - 40, 150, 80);
-    // this.ctx.fillStyle = "green";
-    // this.ctx.fill();
-    // this.ctx.closePath();
-
-    // Laterals
-    // this.ctx.drawImage(this.leftLateral, -20, 100, 400, 550);
-    // this.ctx.drawImage(this.rightLateral, 550, 80, 400, 550);
-
     this.ctx.drawImage(
       this.leftLateral,
       this.lateralLeftX,
@@ -94,7 +81,7 @@ class Game {
     return this.laterals[Math.floor(Math.random() * this.laterals.length)];
   }
 
-  _drawCatchers() {
+  _drawLeftCatcher() {
     this.ctx.drawImage(
       this.leftCatcher,
       this.catcherLeftImgX,
@@ -102,7 +89,9 @@ class Game {
       this.catcherImgWidth,
       this.catcherImgHeight
     );
+  }
 
+  _drawRightCatcher() {
     this.ctx.drawImage(
       this.rightCatcher,
       this.catcherRightImgX,
@@ -110,22 +99,20 @@ class Game {
       this.catcherImgWidth,
       this.catcherImgHeight
     );
+  }
 
-    // this.ctx.drawImage(
-    //   this.leftCatcher,
-    //   this.catchers[0].x - 50,
-    //   this.catchers[0].y - 50,
-    //   140,
-    //   168
-    // );
+  _drawCatchers() {
+    if (!this.intervalLeftCatcher) {
+      this._drawLeftCatcher();
+    } else {
+      this._animateLeftCatcher();
+    }
 
-    // this.ctx.drawImage(
-    //   this.rightCatcher,
-    //   this.catchers[1].x - 20,
-    //   this.catchers[1].y - 50,
-    //   140,
-    //   168
-    // );
+    if (!this.intervalRightCatcher) {
+      this._drawRightCatcher();
+    } else {
+      this._animateRightCatcher();
+    }
 
     // for (var i = 0; i < this.catchers.length; i++) {
     //   this.ctx.beginPath();
@@ -141,6 +128,68 @@ class Game {
     // }
   }
 
+  _updateFrameLeftCatcher() {
+    this.intervalLeftCatcher = setInterval(
+      function() {
+        if (this.curFrameLeftCatcher === this.frameCountCatcher) {
+          this._cancelIntervalLeftCatcher();
+        } else {
+          this.curFrameLeftCatcher++;
+          this.leftCatcherAnimate.src =
+            games[this.gameNum].animateCatcherLeft[this.curFrameLeftCatcher];
+        }
+      }.bind(this),
+      100
+    );
+  }
+
+  _cancelIntervalLeftCatcher() {
+    clearInterval(this.intervalLeftCatcher);
+    this.intervalLeftCatcher = undefined;
+    this.curFrameLeftCatcher = 0;
+  }
+
+  _animateLeftCatcher() {
+    this.ctx.drawImage(
+      this.leftCatcherAnimate,
+      this.catcherLeftImgX,
+      this.catcherLeftImgY,
+      this.catcherImgWidth,
+      this.catcherImgHeight
+    );
+  }
+
+  _updateFrameRightCatcher() {
+    this.intervalRightCatcher = setInterval(
+      function() {
+        if (this.curFrameRightCatcher === this.frameCountCatcher) {
+          this._cancelIntervalRightCatcher();
+        } else {
+          this.curFrameRightCatcher++;
+          this.rightCatcherAnimate.src =
+            games[this.gameNum].animateCatcherRight[this.curFrameRightCatcher];
+        }
+      }.bind(this),
+      100
+    );
+  }
+
+  _cancelIntervalRightCatcher() {
+    clearInterval(this.intervalRightCatcher);
+    this.intervalRightCatcher = undefined;
+    this.curFrameRightCatcher = 0;
+  }
+
+  _animateRightCatcher() {
+    this.ctx.drawImage(
+      this.rightCatcherAnimate,
+      this.catcherRightImgX,
+      this.catcherRightImgY,
+      this.catcherImgWidth,
+      this.catcherImgHeight
+    );
+  }
+
   _drawBar() {
     this.ctx.drawImage(this.barImg, this.bar.x, this.bar.y, 160, 48);
 
@@ -154,16 +203,14 @@ class Game {
   _updateFrameJumper() {
     this.intervalJumper = setInterval(
       function() {
-        this.curFrame = ++this.curFrame % this.frameCount;
-        this.jumperImg.src = games[this.gameNum].jumper[this.curFrame];
+        this.curFrameJumper = ++this.curFrameJumper % this.frameCountJumper;
+        this.jumperImg.src = games[this.gameNum].jumper[this.curFrameJumper];
       }.bind(this),
       200
     );
   }
 
   _drawJumper() {
-    // console.log(this.jumperImg);
-
     switch (this.gameId) {
       case "monkeys":
         this.ctx.drawImage(
@@ -197,8 +244,8 @@ class Game {
           this.jumperImg,
           this.jumper.x,
           this.jumper.y,
-          60,
-          60
+          80,
+          70
         );
         break;
       case "penguin":
@@ -270,9 +317,9 @@ class Game {
           this.ctx.drawImage(
             this.fallenImg,
             this.jumper.fallen[i].x,
-            this.jumper.fallen[i].y - 20,
-            60,
-            60
+            this.jumper.fallen[i].y - 40,
+            90,
+            80
           );
           break;
         case "penguin":
@@ -294,38 +341,7 @@ class Game {
           );
           break;
       }
-      // if (this.gameId === "monkeys") {
-      //   this.ctx.drawImage(
-      //     this.fallenImg,
-      //     this.jumper.fallen[i].x,
-      //     this.jumper.fallen[i].y - 50,
-      //     124,
-      //     82
-      //   );
-      // } else {
-      //   this.ctx.drawImage(
-      //     this.fallenImg,
-      //     this.jumper.fallen[i].x,
-      //     this.jumper.fallen[i].y - 50,
-      //     60,
-      //     60
-      //   );
-      // }
     }
-
-    // for (var i = 0; i < this.jumper.fallen.length; i++) {
-    //   this.ctx.beginPath();
-    //   this.ctx.arc(
-    //     this.jumper.fallen[i].x,
-    //     this.jumper.fallen[i].y,
-    //     this.jumper.radius,
-    //     0,
-    //     Math.PI * 2
-    //   );
-    //   this.ctx.fillStyle = "white";
-    //   this.ctx.fill();
-    //   this.ctx.closePath();
-    // }
   }
 
   _drawScore() {
@@ -368,6 +384,17 @@ class Game {
     }
   }
 
+  _drawElements() {
+    this._drawCanvas();
+    this._drawLaterals();
+    this._drawCatchers();
+    this._drawScore();
+    this._drawLives();
+    this._drawJumper();
+    this._drawFallen();
+    this._drawBar();
+  }
+
   _throwJumper() {
     this.jumper.x = this._randomLateral().x + 50;
     if (this.jumper.x === this.laterals[0].x + 50) {
@@ -387,6 +414,7 @@ class Game {
       this.jumper.y < this.catchers[0].y + this.catchers[0].height
     ) {
       ++this.scoreLeft;
+      this._updateFrameLeftCatcher();
       this._throwJumper();
     }
 
@@ -400,6 +428,7 @@ class Game {
         ++this.scoreRight;
       } else {
         ++this.scoreLeft;
+        this._updateFrameRightCatcher();
       }
 
       this._throwJumper();
@@ -408,24 +437,7 @@ class Game {
     }
   }
 
-  _update() {
-    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-    this._drawCanvas();
-    this._drawLaterals();
-    this._drawCatchers();
-    this._drawScore();
-    this._drawLives();
-    this._drawJumper();
-    this._drawFallen();
-    this._drawBar();
-    this._collisionDetect();
-
-    this.jumper._bounceLaterals();
-
-    // Just in case :)
-    this.jumper._bounceTop();
-
-    // Rebote barra (condicionales)
+  _bounceBar() {
     if (this.jumper.y + this.jumper.dy > this.bar.y - this.jumper.radius - 15) {
       if (
         this.jumper.x >= this.bar.x - 10 &&
@@ -447,7 +459,6 @@ class Game {
         ) {
           this.lives--;
           failSound.play();
-
           var fallenJumper = {
             x: this.jumper.x,
             y: this.jumper.y
@@ -455,7 +466,6 @@ class Game {
           this.jumper.fallen.push(fallenJumper);
           if (!this.lives) {
             gameOver2Sound.play();
-
             this.gameOver();
           } else {
             this._throwJumper();
@@ -463,7 +473,15 @@ class Game {
         }
       }
     }
+  }
 
+  _update() {
+    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    this._drawElements();
+    this._collisionDetect();
+    this.jumper._bounceLaterals();
+    this.jumper._bounceTop();
+    this._bounceBar();
     this.jumper._fall();
 
     if (this.intervalGame !== undefined) {
@@ -475,16 +493,8 @@ class Game {
     this._assignControlsToMouse();
     this.jumper.x = this._randomLateral().x + 50;
     this._update();
-    this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
     this._updateFrameJumper();
-  }
-
-  pause() {
-    if (this.intervalGame) {
-      this.intervalGame = window.cancelAnimationFrame(this.intervalGame);
-      // window.cancelAnimationFrame(this.intervalGame);
-      // this.intervalGame = undefined;
-    }
+    this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
   }
 
   gameOver() {

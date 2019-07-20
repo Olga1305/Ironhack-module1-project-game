@@ -7,7 +7,6 @@ $(document).ready(function() {
   let gameNumber = undefined;
 
   // Mouse
-
   const mouse = {
     x: innerWidth / 2,
     y: innerHeight / 2
@@ -77,7 +76,9 @@ $(document).ready(function() {
     leftLateral.src = games[gameNumber].lateralLeft;
     rightLateral.src = games[gameNumber].lateralRight;
     leftCatcher.src = games[gameNumber].catcherLeft;
+    leftCatcherAnimate.src = games[gameNumber].animateCatcherLeft[0];
     rightCatcher.src = games[gameNumber].catcherRight;
+    rightCatcherAnimate.src = games[gameNumber].animateCatcherRight[0];
     jumperImg.src = games[gameNumber].jumper[0];
     fallenImg.src = games[gameNumber].fallen;
     barImg.src = games[gameNumber].bar;
@@ -123,9 +124,11 @@ $(document).ready(function() {
       leftCatcher: leftCatcher,
       catcherLeftImgX: catcherLeftImgX,
       catcherLeftImgY: catcherLeftImgY,
+      leftCatcherAnimate: leftCatcherAnimate,
       rightCatcher: rightCatcher,
       catcherRightImgX: catcherRightImgX,
       catcherRightImgY: catcherRightImgY,
+      rightCatcherAnimate: rightCatcherAnimate,
       catcherImgWidth: catcherImgWidth,
       catcherImgHeight: catcherImgHeight,
       jumperImg: jumperImg,
@@ -138,7 +141,7 @@ $(document).ready(function() {
     game.start();
 
     $("#home").click(function(e) {
-      window.location.reload(true);
+      window.location.reload(e);
     });
   }
 
