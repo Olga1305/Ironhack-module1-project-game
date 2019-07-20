@@ -97,16 +97,31 @@ $(document).ready(function() {
     catcherRightImgY = games[gameNumber].catcherRightImgY;
     catcherImgWidth = games[gameNumber].catcherImgWidth;
     catcherImgHeight = games[gameNumber].catcherImgHeight;
+    catcherWidth = games[gameNumber].catcherWidth;
+    catcherHeight = games[gameNumber].catcherHeight;
+    catcherLeftX = games[gameNumber].catcherLeftX;
+    catcherRightX = games[gameNumber].catcherRightX;
+    catcherY = games[gameNumber].catcherY;
 
     const game = new Game({
       gameNum: gameNum,
       gameId: gameId,
-      laterals: [
-        new Lateral("left", 160),
-        new Lateral("medium", 400),
-        new Lateral("right", 640)
+      catchers: [
+        new Catcher(
+          "left",
+          catcherLeftX,
+          catcherY,
+          catcherWidth,
+          catcherHeight
+        ),
+        new Catcher(
+          "right",
+          catcherRightX,
+          catcherY,
+          catcherWidth,
+          catcherHeight
+        )
       ],
-      catchers: [new Catcher("left", 70), new Catcher("right", 760)],
       jumper: new Jumper(),
       bar: new Bar(),
       ctx: ctx,

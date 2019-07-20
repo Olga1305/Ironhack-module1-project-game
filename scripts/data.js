@@ -62,7 +62,12 @@ let games = [
     catcherRightImgX: 740,
     catcherRightImgY: 250,
     catcherImgWidth: 140,
-    catcherImgHeight: 168
+    catcherImgHeight: 168,
+    catcherWidth: 70,
+    catcherHeight: 70,
+    catcherLeftX: 70,
+    catcherRightX: 760,
+    catcherY: 300
   },
   {
     id: "hollywood",
@@ -103,7 +108,12 @@ let games = [
     catcherRightImgX: 700,
     catcherRightImgY: 295,
     catcherImgWidth: 120,
-    catcherImgHeight: 104
+    catcherImgHeight: 104,
+    catcherWidth: 100,
+    catcherHeight: 20,
+    catcherLeftX: 80,
+    catcherRightX: 710,
+    catcherY: 340
   },
   {
     id: "fox",
@@ -151,7 +161,12 @@ let games = [
     catcherRightImgX: 770,
     catcherRightImgY: 400,
     catcherImgWidth: 110,
-    catcherImgHeight: 109
+    catcherImgHeight: 109,
+    catcherWidth: 70,
+    catcherHeight: 70,
+    catcherLeftX: 40,
+    catcherRightX: 790,
+    catcherY: 420
   },
   {
     id: "knight",
@@ -203,7 +218,12 @@ let games = [
     catcherRightImgX: 655,
     catcherRightImgY: 330,
     catcherImgWidth: 140,
-    catcherImgHeight: 60
+    catcherImgHeight: 60,
+    catcherWidth: 110,
+    catcherHeight: 20,
+    catcherLeftX: 120,
+    catcherRightX: 670,
+    catcherY: 330
   },
   {
     id: "penguin",
@@ -255,7 +275,12 @@ let games = [
     catcherRightImgX: 760,
     catcherRightImgY: 395,
     catcherImgWidth: 150,
-    catcherImgHeight: 60
+    catcherImgHeight: 60,
+    catcherWidth: 120,
+    catcherHeight: 20,
+    catcherLeftX: 15,
+    catcherRightX: 760,
+    catcherY: 400
   },
   {
     id: "alien",
@@ -291,12 +316,17 @@ let games = [
     lateralRightY: 200,
     lateralRightWidth: 350,
     lateralRightHeight: 292,
-    catcherLeftImgX: 120,
-    catcherLeftImgY: 340,
-    catcherRightImgX: 650,
-    catcherRightImgY: 325,
+    catcherLeftImgX: 0,
+    catcherLeftImgY: 380,
+    catcherRightImgX: 740,
+    catcherRightImgY: 380,
     catcherImgWidth: 152,
-    catcherImgHeight: 60
+    catcherImgHeight: 60,
+    catcherWidth: 120,
+    catcherHeight: 20,
+    catcherLeftX: 20,
+    catcherRightX: 760,
+    catcherY: 400
   }
 ];
 
@@ -316,6 +346,11 @@ let catcherRightImgX = undefined;
 let catcherRightImgY = undefined;
 let catcherImgWidth = undefined;
 let catcherImgHeight = undefined;
+let catcherWidth = undefined;
+let catcherHeight = undefined;
+let catcherLeftX = undefined;
+let catcherRightX = undefined;
+let catcherY = undefined;
 
 // Home images
 

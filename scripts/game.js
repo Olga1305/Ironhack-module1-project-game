@@ -4,7 +4,6 @@ class Game {
     this.gameId = options.gameId;
     this.ctx = options.ctx;
     this.background = options.background;
-    this.laterals = options.laterals;
     this.leftLateral = options.leftLateral;
     this.lateralLeftX = options.lateralLeftX;
     this.lateralLeftY = options.lateralLeftY;
@@ -79,10 +78,6 @@ class Game {
       this.lateralRightWidth,
       this.lateralRightHeight
     );
-  }
-
-  _randomLateral() {
-    return this.laterals[Math.floor(Math.random() * this.laterals.length)];
   }
 
   _drawLeftCatcher() {
@@ -164,19 +159,6 @@ class Game {
         this._drawRightCatcher();
         break;
     }
-
-    // for (var i = 0; i < this.catchers.length; i++) {
-    //   this.ctx.beginPath();
-    //   this.ctx.rect(
-    //     this.catchers[i].x,
-    //     this.catchers[i].y,
-    //     this.catchers[i].width,
-    //     this.catchers[i].height
-    //   );
-    //   this.ctx.fillStyle = "#804000";
-    //   this.ctx.fill();
-    //   this.ctx.closePath();
-    // }
   }
 
   _updateFrameLeftCatcher() {
@@ -316,13 +298,7 @@ class Game {
   }
 
   _drawBar() {
-    this.ctx.drawImage(this.barImg, this.bar.x, this.bar.y, 160, 48);
-
-    // this.ctx.beginPath();
-    // this.ctx.rect(this.bar.x, this.bar.y, this.bar.width, this.bar.height);
-    // this.ctx.fillStyle = "white";
-    // this.ctx.fill();
-    // this.ctx.closePath();
+    this.ctx.drawImage(this.barImg, this.bar.x, this.bar.y - 15, 160, 48);
   }
 
   _updateFrameJumper() {
@@ -340,8 +316,8 @@ class Game {
       case "monkeys":
         this.ctx.drawImage(
           this.jumperImg,
-          this.jumper.x,
-          this.jumper.y,
+          this.jumper.x - this.jumper.radius,
+          this.jumper.y - this.jumper.radius,
           60,
           60
         );
@@ -349,8 +325,8 @@ class Game {
       case "hollywood":
         this.ctx.drawImage(
           this.jumperImg,
-          this.jumper.x,
-          this.jumper.y,
+          this.jumper.x - this.jumper.radius,
+          this.jumper.y - this.jumper.radius,
           60,
           60
         );
@@ -358,8 +334,8 @@ class Game {
       case "fox":
         this.ctx.drawImage(
           this.jumperImg,
-          this.jumper.x,
-          this.jumper.y,
+          this.jumper.x - this.jumper.radius,
+          this.jumper.y - this.jumper.radius,
           60,
           60
         );
@@ -367,8 +343,8 @@ class Game {
       case "knight":
         this.ctx.drawImage(
           this.jumperImg,
-          this.jumper.x,
-          this.jumper.y,
+          this.jumper.x - this.jumper.radius,
+          this.jumper.y - this.jumper.radius,
           80,
           70
         );
@@ -376,8 +352,8 @@ class Game {
       case "penguin":
         this.ctx.drawImage(
           this.jumperImg,
-          this.jumper.x,
-          this.jumper.y,
+          this.jumper.x - this.jumper.radius,
+          this.jumper.y - this.jumper.radius,
           72,
           64
         );
@@ -385,27 +361,13 @@ class Game {
       case "alien":
         this.ctx.drawImage(
           this.jumperImg,
-          this.jumper.x,
-          this.jumper.y,
+          this.jumper.x - this.jumper.radius,
+          this.jumper.y - this.jumper.radius,
           41,
           80
         );
         break;
     }
-
-    // this.ctx.drawImage(this.jumperImg, this.jumper.x, this.jumper.y, 60, 60);
-
-    // this.ctx.beginPath();
-    // this.ctx.arc(
-    //   this.jumper.x,
-    //   this.jumper.y,
-    //   this.jumper.radius,
-    //   0,
-    //   Math.PI * 2
-    // );
-    // this.ctx.fillStyle = "white";
-    // this.ctx.fill();
-    // this.ctx.closePath();
   }
 
   _drawFallen() {
@@ -414,7 +376,7 @@ class Game {
         case "monkeys":
           this.ctx.drawImage(
             this.fallenImg,
-            this.jumper.fallen[i].x,
+            this.jumper.fallen[i].x - this.jumper.radius,
             this.jumper.fallen[i].y - 50,
             124,
             82
@@ -423,7 +385,7 @@ class Game {
         case "hollywood":
           this.ctx.drawImage(
             this.fallenImg,
-            this.jumper.fallen[i].x,
+            this.jumper.fallen[i].x - this.jumper.radius,
             this.jumper.fallen[i].y - 20,
             60,
             60
@@ -432,7 +394,7 @@ class Game {
         case "fox":
           this.ctx.drawImage(
             this.fallenImg,
-            this.jumper.fallen[i].x,
+            this.jumper.fallen[i].x - this.jumper.radius,
             this.jumper.fallen[i].y - 20,
             56,
             26
@@ -441,7 +403,7 @@ class Game {
         case "knight":
           this.ctx.drawImage(
             this.fallenImg,
-            this.jumper.fallen[i].x,
+            this.jumper.fallen[i].x - this.jumper.radius,
             this.jumper.fallen[i].y - 40,
             90,
             80
@@ -450,7 +412,7 @@ class Game {
         case "penguin":
           this.ctx.drawImage(
             this.fallenImg,
-            this.jumper.fallen[i].x,
+            this.jumper.fallen[i].x - this.jumper.radius,
             this.jumper.fallen[i].y - 50,
             72,
             64
@@ -459,7 +421,7 @@ class Game {
         case "alien":
           this.ctx.drawImage(
             this.fallenImg,
-            this.jumper.fallen[i].x,
+            this.jumper.fallen[i].x - this.jumper.radius,
             this.jumper.fallen[i].y - 20,
             80,
             41
@@ -521,8 +483,8 @@ class Game {
   }
 
   _throwJumper() {
-    this.jumper.x = this._randomLateral().x + 50;
-    if (this.jumper.x === this.laterals[0].x + 50) {
+    this.jumper.x = this.jumper._randomJumperX(220, 680);
+    if (this.jumper.x < 450) {
       this.jumper.dx = 1;
     } else {
       this.jumper.dx = -1;
@@ -539,8 +501,9 @@ class Game {
       this.jumper.y < this.catchers[0].y + this.catchers[0].height
     ) {
       ++this.scoreLeft;
-      this.jumperOnLeftPlatformX = this.jumper.x;
-      this.jumperOnLeftPlatformY = this.jumper.y + 20;
+      successSound.play();
+      this.jumperOnLeftPlatformX = this.jumper.x - this.jumper.radius;
+      this.jumperOnLeftPlatformY = this.jumper.y - this.jumper.radius - 10;
       this._updateFrameLeftCatcher();
       this._throwJumper();
     }
@@ -553,10 +516,12 @@ class Game {
     ) {
       if (this.gameId === "hollywood") {
         ++this.scoreRight;
+        successSound.play();
       } else {
         ++this.scoreLeft;
-        this.jumperOnRightPlatformX = this.jumper.x;
-        this.jumperOnRightPlatformY = this.jumper.y + 20;
+        successSound.play();
+        this.jumperOnRightPlatformX = this.jumper.x - this.jumper.radius;
+        this.jumperOnRightPlatformY = this.jumper.y - this.jumper.radius - 10;
         this._updateFrameRightCatcher();
       }
 
@@ -620,7 +585,7 @@ class Game {
 
   start() {
     this._assignControlsToMouse();
-    this.jumper.x = this._randomLateral().x + 50;
+    this.jumper.x = this.jumper._randomJumperX(220, 680);
     this._update();
     this._updateFrameJumper();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));

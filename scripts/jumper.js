@@ -10,6 +10,10 @@ class Jumper {
     this.fallen = [];
   }
 
+  _randomJumperX(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
   _fall() {
     this.dy += this.gravity;
     this.x += this.dx;

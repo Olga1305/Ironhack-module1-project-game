@@ -1,10 +1,10 @@
 class Catcher {
-  constructor(id, x) {
+  constructor(id, x, y, width, height) {
     this.id = id;
-    this.width = 70;
-    this.height = 70;
+    this.width = width;
+    this.height = height;
     this.x = x;
-    this.y = 300;
+    this.y = y;
     this.dxLeft = -4;
     this.dxRight = 4;
   }
